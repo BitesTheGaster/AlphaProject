@@ -17,17 +17,19 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=3
 window/stretch/mode="viewport"
 
 [file_customization]
 
 folder_colors={
-"res://Art/": "pink",
-"res://Bible/": "yellow",
-"res://Main/": "green",
-"res://Player/": "red",
-"res://StateMachine/": "gray"
+"res://art/": "pink",
+"res://bible/": "yellow",
+"res://main/": "green",
+"res://player/": "red",
+"res://state_machines/": "gray"
 }
 
 [input]
@@ -59,5 +61,6 @@ Right={
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=3
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(0.14509805, 0.07450981, 0.101960786, 1)
