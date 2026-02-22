@@ -1,10 +1,14 @@
 [gd_scene format=3 uid="uid://bgneytkun0o4c"]
 
-[ext_resource type="PackedScene" uid="uid://bitdylwr4ey0o" path="res://Player/player.tscn" id="1_yh5la"]
+[ext_resource type="PackedScene" uid="uid://bitdylwr4ey0o" path="res://player/player.tscn" id="1_53q0u"]
+[ext_resource type="PackedScene" uid="uid://cfevt4bao3dm6" path="res://main/rooms/room.tscn" id="2_pjrb6"]
 
 [node name="Main" type="Node2D" unique_id=567999151]
+y_sort_enabled = true
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1105043610]
-zoom = Vector2(2, 2)
+[node name="Player" parent="." unique_id=1479232073 instance=ExtResource("1_53q0u")]
 
-[node name="Player" parent="." unique_id=1479232073 instance=ExtResource("1_yh5la")]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1105043610]
+zoom = Vector2(4, 4)
+
+[node name="Room" parent="." unique_id=207893912 instance=ExtResource("2_pjrb6")]

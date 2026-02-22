@@ -1,2 +1,5 @@
 class_name PlayerState
-extends Node
+extends State
+##
+
+@export var player: Player 
