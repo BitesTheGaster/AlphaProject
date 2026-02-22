@@ -18,6 +18,9 @@ func update(delta: float) -> void:
 	
 	player.animation_tree.set("parameters/Idle/blend_position", 
 			player.last_dir)
+	
+	if Input.is_action_just_pressed("Attack"):
+		state_machine.change_state("attack")
 
 
 
@@ -31,8 +34,12 @@ func update_input(event: InputEvent) -> void:
 
 
 func enter() -> void:
+	# Force Continuous
+	player.animation_tree.set("callback_mode_discrete", 2)
+	
 	player.animation_tree.set("parameters/conditions/idle", true)
 	player.animation_tree.set("parameters/conditions/run", false)
+	player.animation_tree.set("parameters/conditions/attack", false)
 
 func exit() -> void:
 	pass

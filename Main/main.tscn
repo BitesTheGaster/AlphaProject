@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bitdylwr4ey0o" path="res://player/player.tscn" id="1_53q0u"]
 [ext_resource type="PackedScene" uid="uid://cfevt4bao3dm6" path="res://main/rooms/room.tscn" id="2_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://6qecqo87qhlo" path="res://enemies/orc/orc_enemy.tscn" id="3_xwkvk"]
 
 [node name="Main" type="Node2D" unique_id=567999151]
 y_sort_enabled = true
@@ -12,3 +13,6 @@ y_sort_enabled = true
 zoom = Vector2(4, 4)
 
 [node name="Room" parent="." unique_id=207893912 instance=ExtResource("2_pjrb6")]
+
+[node name="OrcEnemy" parent="." unique_id=1422445384 instance=ExtResource("3_xwkvk")]
+position = Vector2(-100, 0)

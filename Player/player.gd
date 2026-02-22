@@ -10,8 +10,13 @@ var input_dir: Vector2
 
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var sprite: AnimatedSprite2D = %Sprite
+@onready var attack_length: Timer = $AttackLength
 
 
 func _ready() -> void:
 	sprite.play("IdleDown")
 	animation_tree.active = true
+
+
+func take_damage(damage: int):
+	stats.health -= damage
