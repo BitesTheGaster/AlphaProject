@@ -11,7 +11,7 @@ func update(delta: float) -> void:
 	player.input_dir = Vector2(
 			Input.get_axis("Left", "Right"),
 			Input.get_axis("Up", "Down")
-	)
+	).normalized()
 	
 	if Input.is_action_pressed("Right"):
 		player.last_dir = Vector2.RIGHT

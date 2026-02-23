@@ -303,7 +303,8 @@ shape = SubResource("CircleShape2D_klwc4")
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_avnpo")
 animation = &"Attack2"
-frame_progress = 0.7044761
+frame = 1
+frame_progress = 0.4789576
 offset = Vector2(0, -3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1173225126]

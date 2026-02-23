@@ -131,7 +131,7 @@ states/Run/node = SubResource("AnimationNodeBlendSpace2D_x3vf3")
 states/Run/position = Vector2(504.08002, 173.6)
 states/Start/position = Vector2(170.40001, 80.73139)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_apopc"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_btcbx"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_qjkh3"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_rptt4"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_r7pn3"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_7pqkx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_uw77l")]
-graph_offset = Vector2(-19.073029, -16)
+graph_offset = Vector2(14.926971, -35)
 
 [sub_resource type="Animation" id="Animation_btcbx"]
 length = 0.001
@@ -1476,16 +1476,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7c3f"]
-size = Vector2(10, 20)
+size = Vector2(14, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjvpn"]
-size = Vector2(20, 10)
+size = Vector2(20, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7qer"]
-size = Vector2(20, 10)
+size = Vector2(20, 14)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4c7l"]
-size = Vector2(10, 20)
+size = Vector2(14, 20)
 
 [node name="Player" type="CharacterBody2D" unique_id=1479232073 groups=["player"]]
 y_sort_enabled = true

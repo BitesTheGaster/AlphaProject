@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://bietkelq82yro"]
+
+[ext_resource type="Texture2D" uid="uid://dxq8ctfgvupkk" path="res://art/UI/WideFrame.png" id="1_276te"]
+[ext_resource type="Script" uid="uid://b680mnoggj6re" path="res://ui/hud.gd" id="1_546lt"]
+[ext_resource type="Texture2D" uid="uid://cwoeb42kbjohr" path="res://art/UI/WeaponFrame.png" id="1_rbyyf"]
+[ext_resource type="Texture2D" uid="uid://dv423dclp0jnv" path="res://art/UI/ItemSlots.png" id="4_7ihmi"]
+[ext_resource type="FontFile" uid="uid://sdub1uxy600q" path="res://art/RasterForgeRegular-JpBgm.ttf" id="5_en2x2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1v5rv"]
+font = ExtResource("5_en2x2")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Hud" type="CanvasLayer" unique_id=594341442]
+script = ExtResource("1_546lt")
+
+[node name="Inventory" type="Sprite2D" parent="." unique_id=660413149]
+position = Vector2(544, 284)
+texture = ExtResource("1_276te")
+offset = Vector2(432, 272)
+
+[node name="WeaponSlot" type="Sprite2D" parent="Inventory" unique_id=2121923305]
+position = Vector2(0, 480)
+texture = ExtResource("1_rbyyf")
+offset = Vector2(32, 32)
+
+[node name="WeaponSprite" type="Sprite2D" parent="Inventory/WeaponSlot" unique_id=1251435134]
+unique_name_in_owner = true
+position = Vector2(32, 32)
+
+[node name="ItemSlots" type="Sprite2D" parent="Inventory" unique_id=1145691456]
+unique_name_in_owner = true
+texture = ExtResource("4_7ihmi")
+offset = Vector2(432, 152)
+
+[node name="1" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=67885289]
+position = Vector2(32, 32)
+
+[node name="2" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=517374910]
+position = Vector2(112, 32)
+
+[node name="3" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1759643349]
+position = Vector2(192, 32)
+
+[node name="4" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1126792895]
+position = Vector2(272, 32)
+
+[node name="5" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=664756696]
+position = Vector2(352, 32)
+
+[node name="6" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=2060522958]
+position = Vector2(432, 32)
+
+[node name="7" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1329399221]
+position = Vector2(512, 32)
+
+[node name="8" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=92793272]
+position = Vector2(592, 32)
+
+[node name="9" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=248713387]
+position = Vector2(672, 32)
+
+[node name="10" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=804358260]
+position = Vector2(752, 32)
+
+[node name="11" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1548907674]
+position = Vector2(832, 32)
+
+[node name="12" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=2045305438]
+position = Vector2(32, 112)
+
+[node name="13" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=496329467]
+position = Vector2(112, 112)
+
+[node name="14" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1629919590]
+position = Vector2(192, 112)
+
+[node name="15" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=713103879]
+position = Vector2(272, 112)
+
+[node name="16" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=2123266914]
+position = Vector2(352, 112)
+
+[node name="17" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1959810724]
+position = Vector2(432, 112)
+
+[node name="18" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1670702200]
+position = Vector2(512, 112)
+
+[node name="19" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=429261896]
+position = Vector2(592, 112)
+
+[node name="20" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=217981775]
+position = Vector2(672, 112)
+
+[node name="21" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1279909910]
+position = Vector2(752, 112)
+
+[node name="22" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1647332096]
+position = Vector2(832, 112)
+
+[node name="23" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=883803070]
+position = Vector2(32, 192)
+
+[node name="24" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=2028197027]
+position = Vector2(112, 192)
+
+[node name="25" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=714525627]
+position = Vector2(192, 192)
+
+[node name="26" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=317312566]
+position = Vector2(272, 192)
+
+[node name="27" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=865056809]
+position = Vector2(352, 192)
+
+[node name="28" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1465475061]
+position = Vector2(432, 192)
+
+[node name="29" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=2075217391]
+position = Vector2(512, 192)
+
+[node name="30" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1206935556]
+position = Vector2(592, 192)
+
+[node name="31" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1494909653]
+position = Vector2(672, 192)
+
+[node name="32" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=602908510]
+position = Vector2(752, 192)
+
+[node name="33" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=321613209]
+position = Vector2(832, 192)
+
+[node name="34" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1469824349]
+position = Vector2(32, 272)
+
+[node name="35" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=914974361]
+position = Vector2(112, 272)
+
+[node name="36" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1058782332]
+position = Vector2(192, 272)
+
+[node name="37" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1958923152]
+position = Vector2(272, 272)
+
+[node name="38" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1361156297]
+position = Vector2(352, 272)
+
+[node name="39" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=682233423]
+position = Vector2(432, 272)
+
+[node name="40" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=452872172]
+position = Vector2(512, 272)
+
+[node name="41" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1669368309]
+position = Vector2(592, 272)
+
+[node name="42" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1084216198]
+position = Vector2(672, 272)
+
+[node name="43" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=1705731932]
+position = Vector2(752, 272)
+
+[node name="44" type="Sprite2D" parent="Inventory/ItemSlots" unique_id=136328833]
+position = Vector2(832, 272)
+
+[node name="Tooltip" type="Label" parent="." unique_id=707375468]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0
+text = "Zazov"
+label_settings = SubResource("LabelSettings_1v5rv")

@@ -44,5 +44,4 @@ func _on_attack_length_timeout() -> void:
 
 func _on_sword_attacks_body_entered(body: Node2D) -> void:
 	if body is Enemy:
-		# Пока что только 1 урон так как ресурс оружия ещё не сделан
-		body.take_damage(1)
+		body.take_damage_from_weapon(player.stats.weapon_stats)
