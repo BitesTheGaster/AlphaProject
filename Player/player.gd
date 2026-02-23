@@ -15,7 +15,13 @@ var inventory_opened: bool = false
 
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var sprite: AnimatedSprite2D = %Sprite
-@onready var attack_length: Timer = $AttackLength
+@onready var attack_length: Timer = %AttackLength
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var state_machine: PlayerStateMachine = %PlayerStateMachine
+@onready var attack_hibox_down: CollisionShape2D = %Down
+@onready var attack_hibox_left: CollisionShape2D = %Left
+@onready var attack_hibox_right: CollisionShape2D = %Right
+@onready var attack_hibox_up: CollisionShape2D = %Up
 
 
 func _ready() -> void:	
@@ -25,7 +31,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Inventory") and \
-			not inventory_opened:
+			not inventory_opened and \
+			state_machine.current_state.name != "attack":
 		inventory_opened = true
 		open_inventory.emit()
 
@@ -38,3 +45,21 @@ func _process(delta: float) -> void:
 
 func take_damage(weapon_stats: WeaponStats):
 	stats.health -= weapon_stats.damage
+
+
+func update_attack_hitbox():
+	attack_hibox_down.shape.set("size", stats.weapon_stats.hitbox)
+	attack_hibox_left.shape.set("size",
+			Vector2(
+					stats.weapon_stats.hitbox.y,
+					stats.weapon_stats.hitbox.x))
+	attack_hibox_right.shape.set("size",
+			Vector2(
+					stats.weapon_stats.hitbox.y,
+					stats.weapon_stats.hitbox.x))
+	attack_hibox_up.shape.set("size", stats.weapon_stats.hitbox)
+	var pos: float = stats.weapon_stats.hitbox.y/2
+	attack_hibox_down.position = Vector2(0, pos)
+	attack_hibox_left.position = Vector2(-pos, 0)
+	attack_hibox_right.position = Vector2(pos, 0)
+	attack_hibox_up.position = Vector2(0, -pos)

@@ -6,3 +6,4 @@ extends Resource
 @export var applied_debuffs: Array[Debuff] = [
 	
 ]
+@export var hitbox := Vector2(14, 20)

@@ -2,57 +2,65 @@ class_name Inventory
 extends Resource
 
 var items: Dictionary[int, Item] = {
-	1: preload("res://resources/items/weapons/golden_short_sword.tres"),
-	2: Item.new(),
-	3: Item.new(),
-	4: preload("res://resources/items/weapons/fire_sword.tres"),
-	5: Item.new(),
-	6: Item.new(),
-	7: Item.new(),
-	8: Item.new(),
-	9: Item.new(),
-	10: Item.new(),
-	11: Item.new(),
+	1: Global.weapons[Global.GOLDEN_SHORT_SWORD],
+	2: Global.weapons[Global.IRON_SWORD],
+	3: Global.items[Global.EMPTY],
+	4: Global.items[Global.EMPTY],
+	5: Global.items[Global.EMPTY],
+	6: Global.items[Global.EMPTY],
+	7: Global.items[Global.EMPTY],
+	8: Global.items[Global.EMPTY],
+	9: Global.items[Global.EMPTY],
+	10: Global.items[Global.EMPTY],
+	11: Global.items[Global.EMPTY],
 	
-	11+1: Item.new(),
-	11+2: Item.new(),
-	11+3: Item.new(),
-	11+4: Item.new(),
-	11+5: Item.new(),
-	11+6: Item.new(),
-	11+7: Item.new(),
-	11+8: Item.new(),
-	11+9: Item.new(),
-	11+10: Item.new(),
-	11+11: Item.new(),
+	11+1: Global.items[Global.EMPTY],
+	11+2: Global.items[Global.EMPTY],
+	11+3: Global.items[Global.EMPTY],
+	11+4: Global.items[Global.EMPTY],
+	11+5: Global.items[Global.EMPTY],
+	11+6: Global.items[Global.EMPTY],
+	11+7: Global.items[Global.EMPTY],
+	11+8: Global.items[Global.EMPTY],
+	11+9: Global.items[Global.EMPTY],
+	11+10: Global.items[Global.EMPTY],
+	11+11: Global.items[Global.EMPTY],
 	
-	2*11+1: Item.new(),
-	2*11+2: Item.new(),
-	2*11+3: Item.new(),
-	2*11+4: Item.new(),
-	2*11+5: Item.new(),
-	2*11+6: Item.new(),
-	2*11+7: Item.new(),
-	2*11+8: Item.new(),
-	2*11+9: Item.new(),
-	2*11+10: Item.new(),
-	2*11+11: Item.new(),
+	2*11+1: Global.items[Global.EMPTY],
+	2*11+2: Global.items[Global.EMPTY],
+	2*11+3: Global.items[Global.EMPTY],
+	2*11+4: Global.items[Global.EMPTY],
+	2*11+5: Global.items[Global.EMPTY],
+	2*11+6: Global.items[Global.EMPTY],
+	2*11+7: Global.items[Global.EMPTY],
+	2*11+8: Global.items[Global.EMPTY],
+	2*11+9: Global.items[Global.EMPTY],
+	2*11+10: Global.items[Global.EMPTY],
+	2*11+11: Global.items[Global.EMPTY],
 	
-	3*11+1: Item.new(),
-	3*11+2: Item.new(),
-	3*11+3: Item.new(),
-	3*11+4: Item.new(),
-	3*11+5: Item.new(),
-	3*11+6: Item.new(),
-	3*11+7: Item.new(),
-	3*11+8: Item.new(),
-	3*11+9: Item.new(),
-	3*11+10: Item.new(),
-	3*11+11: Item.new(),
+	3*11+1: Global.items[Global.EMPTY],
+	3*11+2: Global.items[Global.EMPTY],
+	3*11+3: Global.items[Global.EMPTY],
+	3*11+4: Global.items[Global.EMPTY],
+	3*11+5: Global.items[Global.EMPTY],
+	3*11+6: Global.items[Global.EMPTY],
+	3*11+7: Global.items[Global.EMPTY],
+	3*11+8: Global.items[Global.EMPTY],
+	3*11+9: Global.items[Global.EMPTY],
+	3*11+10: Global.items[Global.EMPTY],
+	3*11+11: Global.items[Global.EMPTY],
 }
 
-var weapon: Weapon = preload("res://resources/items/weapons/iron_short_sword.tres")
+var weapon: Weapon = Global.weapons[Global.IRON_SHORT_SWORD]
 #var magic1: Spell
 #var magic2: Spell
 #var magic3: Spell
 #var trinkets: Array[Trinket]
+
+
+func get_free_slot() -> int:
+	for i in range(1, 44+1):
+		if items[i] == Global.items[Global.EMPTY]:
+			return i
+	
+	return 0

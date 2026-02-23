@@ -1508,6 +1508,7 @@ parameters/Idle/blend_position = Vector2(0.0073461533, 0.2651515)
 parameters/Run/blend_position = Vector2(0.0066945553, -0.4545455)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791675351]
+unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_fhl08")
 libraries/PlayerAttacks = SubResource("AnimationLibrary_knn7v")
 libraries/PlayerMovement = SubResource("AnimationLibrary_5htga")
@@ -1519,6 +1520,7 @@ animation = &"IdleDown"
 offset = Vector2(0, -7)
 
 [node name="PlayerStateMachine" type="Node" parent="." unique_id=929530361 node_paths=PackedStringArray("player", "initial_state")]
+unique_name_in_owner = true
 script = ExtResource("4_gwnis")
 player = NodePath("..")
 initial_state = NodePath("IdlePlayerState")
@@ -1545,26 +1547,31 @@ metadata/_custom_type_script = "uid://ds0wxaiw7eujl"
 [node name="SwordAttacks" type="Area2D" parent="." unique_id=945435279]
 
 [node name="Down" type="CollisionShape2D" parent="SwordAttacks" unique_id=376455901]
+unique_name_in_owner = true
 position = Vector2(0, 10)
 shape = SubResource("RectangleShape2D_x7c3f")
 disabled = true
 
 [node name="Left" type="CollisionShape2D" parent="SwordAttacks" unique_id=203913752]
+unique_name_in_owner = true
 position = Vector2(-10, 0)
 shape = SubResource("RectangleShape2D_bjvpn")
 disabled = true
 
 [node name="Right" type="CollisionShape2D" parent="SwordAttacks" unique_id=45029484]
+unique_name_in_owner = true
 position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_s7qer")
 disabled = true
 
 [node name="Up" type="CollisionShape2D" parent="SwordAttacks" unique_id=1119407696]
+unique_name_in_owner = true
 position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_g4c7l")
 disabled = true
 
 [node name="AttackLength" type="Timer" parent="." unique_id=1738035719]
+unique_name_in_owner = true
 wait_time = 0.875
 one_shot = true
 

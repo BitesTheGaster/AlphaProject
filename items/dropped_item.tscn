@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b0p6x8ccgca6b"]
+
+[ext_resource type="Script" uid="uid://bs2o3kxnnf0q7" path="res://items/dropped_item.gd" id="1_clxf8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8wgom"]
+radius = 8.0
+
+[node name="DroppedItem" type="Area2D" unique_id=967671655]
+script = ExtResource("1_clxf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=177428000]
+unique_name_in_owner = true
+shape = SubResource("CircleShape2D_8wgom")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=813330350]
+unique_name_in_owner = true
+scale = Vector2(0.25, 0.25)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

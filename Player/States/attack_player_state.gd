@@ -33,9 +33,17 @@ func enter() -> void:
 			player.last_dir)
 	
 	player.attack_length.start()
+	
+	player.attack_length.wait_time = 0.875/player.stats.weapon_stats.speed
+	player.sprite.speed_scale = player.stats.weapon_stats.speed
+	player.animation_player.speed_scale = player.stats.weapon_stats.speed
+	
+	player.close_inventory.emit()
+
 
 func exit() -> void:
-	pass
+	player.sprite.speed_scale = 1
+	player.animation_player.speed_scale = 1
 
 
 func _on_attack_length_timeout() -> void:
