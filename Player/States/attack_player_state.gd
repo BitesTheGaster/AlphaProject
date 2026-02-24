@@ -46,7 +46,8 @@ func exit() -> void:
 
 
 func _on_attack_length_timeout() -> void:
-	state_machine.change_state("idle")
+	if state_machine.current_state.name != "death":
+		state_machine.change_state("idle")
 
 
 func _on_sword_attacks_body_entered(body: Node2D) -> void:

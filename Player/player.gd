@@ -2,10 +2,9 @@ class_name Player
 extends CharacterBody2D
 ## Main player script
 
-signal taken_damage()
+signal health_changed(health: int)
 signal open_inventory()
 signal close_inventory()
-
 
 var stats: PlayerStats = preload("res://resources/player_stats.tres")\
 		.duplicate()
@@ -43,8 +42,24 @@ func _process(delta: float) -> void:
 		close_inventory.emit()
 
 
-func take_damage(weapon_stats: WeaponStats):
+func take_damage(damage: int):
+	if stats.health <= 0:
+		return
+	stats.health -= damage
+	health_changed.emit(stats.health)
+	if stats.health <= 0:
+		state_machine.change_state("death")
+
+
+func take_damage_from_weapon(weapon_stats: WeaponStats):
+	if stats.health <= 0:
+		return
 	stats.health -= weapon_stats.damage
+	for debuff in weapon_stats.applied_debuffs:
+		stats.current_debuffs.append(debuff.duplicate())
+	health_changed.emit(stats.health)
+	if stats.health <= 0:
+		state_machine.change_state("death")
 
 
 func update_attack_hitbox():
@@ -63,3 +78,8 @@ func update_attack_hitbox():
 	attack_hibox_left.position = Vector2(-pos, 0)
 	attack_hibox_right.position = Vector2(pos, 0)
 	attack_hibox_up.position = Vector2(0, -pos)
+
+
+func _on_death_time_timeout() -> void:
+	
+	self.queue_free()

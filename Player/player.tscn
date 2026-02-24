@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://4wyr50dci8ro" path="res://art/RPG_Hero/run/run_up_40x40.png" id="9_c35mf"]
 [ext_resource type="Texture2D" uid="uid://d2d5t5g72y443" path="res://art/RPG_Hero/death/death_up_40x40.png" id="9_uw77l"]
 [ext_resource type="Script" uid="uid://c4qtufferjitw" path="res://player/states/attack_player_state.gd" id="19_x7c3f"]
+[ext_resource type="Script" uid="uid://bm38raylp7l7y" path="res://player/states/death_player_state.gd" id="22_bjvpn"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 5.0
@@ -45,6 +46,29 @@ blend_point_1/pos = Vector2(0, -1)
 blend_point_2/node = SubResource("AnimationNodeAnimation_s7qer")
 blend_point_2/pos = Vector2(0, 1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_g4c7l")
+blend_point_3/pos = Vector2(1, 0)
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_knn7v"]
+animation = &"Death/Up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7pqkx"]
+animation = &"Death/Down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uw77l"]
+animation = &"Death/Left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rptt4"]
+animation = &"Death/Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_bjvpn"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_knn7v")
+blend_point_0/pos = Vector2(0, -1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_7pqkx")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_uw77l")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_rptt4")
 blend_point_3/pos = Vector2(1, 0)
 blend_mode = 1
 
@@ -121,16 +145,30 @@ advance_condition = &"attack"
 advance_mode = 2
 advance_condition = &"idle"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s7qer"]
+advance_mode = 2
+advance_condition = &"death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g4c7l"]
+advance_mode = 2
+advance_condition = &"death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_knn7v"]
+advance_mode = 2
+advance_condition = &"death"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_gwnis"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace2D_knn7v")
 states/Attack/position = Vector2(510.4, -14.600006)
+states/Death/node = SubResource("AnimationNodeBlendSpace2D_bjvpn")
+states/Death/position = Vector2(673.7269, 82.25583)
 states/End/position = Vector2(835.2, 79.58929)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_4ntmi")
 states/Idle/position = Vector2(337.18332, 79.1805)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_x3vf3")
-states/Run/position = Vector2(504.08002, 173.6)
+states/Run/position = Vector2(510.576, 174.40001)
 states/Start/position = Vector2(170.40001, 80.73139)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_apopc"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_btcbx"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_qjkh3"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_rptt4"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_r7pn3"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_7pqkx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_uw77l")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_apopc"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_btcbx"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_qjkh3"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_rptt4"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_r7pn3"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_7pqkx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_uw77l"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_s7qer"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_g4c7l"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_knn7v")]
 graph_offset = Vector2(14.926971, -35)
 
 [sub_resource type="Animation" id="Animation_btcbx"]
@@ -183,10 +221,153 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"DeathDown"]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fhl08"]
 _data = {
 &"RESET": SubResource("Animation_btcbx")
+}
+
+[sub_resource type="Animation" id="Animation_7pqkx"]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.95),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"DeathDown", &"DeadDown"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_knn7v"]
+resource_name = "Left"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.95),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"DeathLeft", &"DeadLeft"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_uw77l"]
+resource_name = "Right"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.95),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"DeathRight", &"DeadRight"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_rptt4"]
+resource_name = "Up"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.95),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"DeathUp", &"DeadUp"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uw77l"]
+_data = {
+&"Down": SubResource("Animation_7pqkx"),
+&"Left": SubResource("Animation_knn7v"),
+&"Right": SubResource("Animation_uw77l"),
+&"Up": SubResource("Animation_rptt4")
 }
 
 [sub_resource type="Animation" id="Animation_x7c3f"]
@@ -1501,22 +1682,25 @@ root_node = NodePath("%AnimationTree/..")
 tree_root = SubResource("AnimationNodeStateMachine_gwnis")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/attack = false
+parameters/conditions/death = false
 parameters/conditions/idle = false
 parameters/conditions/run = false
 parameters/Attack/blend_position = Vector2(-0.0036730766, 1.090909)
+parameters/Death/blend_position = Vector2(0, 0)
 parameters/Idle/blend_position = Vector2(0.0073461533, 0.2651515)
 parameters/Run/blend_position = Vector2(0.0066945553, -0.4545455)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791675351]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_fhl08")
+libraries/Death = SubResource("AnimationLibrary_uw77l")
 libraries/PlayerAttacks = SubResource("AnimationLibrary_knn7v")
 libraries/PlayerMovement = SubResource("AnimationLibrary_5htga")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1261945476]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_bbimk")
-animation = &"IdleDown"
+animation = &"DeathDown"
 offset = Vector2(0, -7)
 
 [node name="PlayerStateMachine" type="Node" parent="." unique_id=929530361 node_paths=PackedStringArray("player", "initial_state")]
@@ -1543,6 +1727,12 @@ script = ExtResource("6_vtle1")
 player = NodePath("../..")
 state_machine = NodePath("..")
 metadata/_custom_type_script = "uid://ds0wxaiw7eujl"
+
+[node name="DeathPlayerState" type="Node" parent="PlayerStateMachine" unique_id=1651342882 node_paths=PackedStringArray("player", "state_machine")]
+script = ExtResource("22_bjvpn")
+player = NodePath("../..")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://bm38raylp7l7y"
 
 [node name="SwordAttacks" type="Area2D" parent="." unique_id=945435279]
 collision_layer = 3
@@ -1577,5 +1767,9 @@ unique_name_in_owner = true
 wait_time = 0.875
 one_shot = true
 
+[node name="DeathTime" type="Timer" parent="." unique_id=1882009095]
+unique_name_in_owner = true
+
 [connection signal="body_entered" from="SwordAttacks" to="PlayerStateMachine/AttackPlayerState" method="_on_sword_attacks_body_entered"]
 [connection signal="timeout" from="AttackLength" to="PlayerStateMachine/AttackPlayerState" method="_on_attack_length_timeout"]
+[connection signal="timeout" from="DeathTime" to="." method="_on_death_time_timeout"]

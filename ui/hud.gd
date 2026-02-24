@@ -8,6 +8,8 @@ var _item_sprites: Dictionary[int, Sprite2D]
 @onready var tooltip: Label = %Tooltip
 @onready var item_slots: Sprite2D = %ItemSlots
 @onready var player: Player = %Player
+@onready var inventory: Sprite2D = %Inventory
+@onready var health_bar: TextureProgressBar = %HealthBar
 
 
 func _ready() -> void:
@@ -88,3 +90,7 @@ func update_textures():
 			child.texture = Global.inventory.items[int(child.name)].texture
 	
 	weapon_sprite.texture = Global.inventory.weapon.texture
+
+
+func on_player_health_changed(health: int):
+	health_bar.value = health

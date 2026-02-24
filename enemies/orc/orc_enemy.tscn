@@ -316,7 +316,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AxeAttacks/CollisionShape2D:disabled")
+tracks/1/path = NodePath("AxeAttacks/AxeCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -356,7 +356,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AxeAttacks/CollisionShape2D:disabled")
+tracks/1/path = NodePath("AxeAttacks/AxeCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -482,7 +482,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AxeAttacks/CollisionShape2D:disabled")
+tracks/1/path = NodePath("AxeAttacks/AxeCollisionShape:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -625,7 +625,8 @@ debug_color = Color(0.71232146, 0.5380312, 5.7756904e-07, 0)
 [node name="AxeAttacks" type="Area2D" parent="." unique_id=154798681]
 unique_name_in_owner = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AxeAttacks" unique_id=1042018925]
+[node name="AxeCollisionShape" type="CollisionShape2D" parent="AxeAttacks" unique_id=1042018925]
+unique_name_in_owner = true
 position = Vector2(12, 0)
 shape = SubResource("RectangleShape2D_klwc4")
 
@@ -675,6 +676,7 @@ texture_progress_offset = Vector2(5, 0)
 [connection signal="navigation_finished" from="NavigationAgent2D" to="EnemyStateMachine/IdleOrcState" method="_on_navigation_agent_2d_navigation_finished"]
 [connection signal="body_entered" from="AgroRange" to="." method="_on_agro_range_body_entered"]
 [connection signal="body_exited" from="AgroRange" to="." method="_on_agro_range_body_exited"]
+[connection signal="body_entered" from="AxeAttacks" to="EnemyStateMachine/AttackOrcState" method="_on_axe_attacks_body_entered"]
 [connection signal="timeout" from="WanderTime" to="EnemyStateMachine/IdleOrcState" method="_on_wander_time_timeout"]
 [connection signal="timeout" from="WaitTime" to="EnemyStateMachine/IdleOrcState" method="_on_wait_time_timeout"]
 [connection signal="timeout" from="AttackLength" to="EnemyStateMachine/AttackOrcState" method="_on_attack_length_timeout"]

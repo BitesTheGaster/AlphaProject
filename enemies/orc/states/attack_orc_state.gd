@@ -44,3 +44,8 @@ func exit() -> void:
 func _on_attack_length_timeout() -> void:
 	if state_machine.current_state.name != "death":
 		state_machine.change_state("move")
+
+
+func _on_axe_attacks_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body.take_damage_from_weapon(enemy.stats.weapon_stats)

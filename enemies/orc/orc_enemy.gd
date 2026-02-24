@@ -17,10 +17,13 @@ signal died(global_pos: Vector2, item: Item)
 @onready var hurt_anim: Timer = %HurtAnim
 @onready var health_bar: TextureProgressBar = %HealthBar
 @onready var collision: CollisionShape2D = %CollisionShape2D
+@onready var axe_collision: CollisionShape2D = %AxeCollisionShape
 
 
 func _ready() -> void:
 	stats = preload("res://resources/orc_stats.tres")
+	
+	axe_collision.set_deferred("disabled", true)
 	
 	sprite.play("Idle")
 	nav_agent.velocity_computed.connect(_on_nav_agent_velocity_computed)
@@ -72,7 +75,7 @@ func take_damage(damage: int):
 		return
 	stats.health -= damage
 	health_bar.value = stats.health
-	if stats.health < 0:
+	if stats.health <= 0:
 		state_machine.change_state("death")
 
 
@@ -84,5 +87,5 @@ func take_damage_from_weapon(weapon_stats: WeaponStats):
 		stats.current_debuffs.append(debuff.duplicate())
 	state_machine.change_state("hurt")
 	health_bar.value = stats.health
-	if stats.health < 0:
+	if stats.health <= 0:
 		state_machine.change_state("death")

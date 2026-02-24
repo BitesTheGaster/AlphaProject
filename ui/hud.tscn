@@ -5,6 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://cwoeb42kbjohr" path="res://art/UI/WeaponFrame.png" id="1_rbyyf"]
 [ext_resource type="Texture2D" uid="uid://dv423dclp0jnv" path="res://art/UI/ItemSlots.png" id="4_7ihmi"]
 [ext_resource type="FontFile" uid="uid://sdub1uxy600q" path="res://art/RasterForgeRegular-JpBgm.ttf" id="5_en2x2"]
+[ext_resource type="Texture2D" uid="uid://op686w8m7ivm" path="res://art/UI/PlayerHealthBarUnder.png" id="6_q43x7"]
+[ext_resource type="Texture2D" uid="uid://ci3rh0uekdkg1" path="res://art/UI/PlayerHealthBarProgress.png" id="7_srpbi"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1v5rv"]
 font = ExtResource("5_en2x2")
@@ -15,6 +17,8 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_546lt")
 
 [node name="Inventory" type="Sprite2D" parent="." unique_id=660413149]
+unique_name_in_owner = true
+visible = false
 position = Vector2(544, 284)
 texture = ExtResource("1_276te")
 offset = Vector2(432, 272)
@@ -167,7 +171,20 @@ position = Vector2(832, 272)
 
 [node name="Tooltip" type="Label" parent="." unique_id=707375468]
 unique_name_in_owner = true
-offset_right = 40.0
-offset_bottom = 40.0
-text = "Zazov"
+visible = false
+offset_left = 1841.0
+offset_top = 1067.0
+offset_right = 1921.0
+offset_bottom = 1107.0
+text = "Nothing"
 label_settings = SubResource("LabelSettings_1v5rv")
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1280921048]
+unique_name_in_owner = true
+offset_right = 48.0
+offset_bottom = 40.0
+scale = Vector2(4, 4)
+value = 100.0
+texture_under = ExtResource("6_q43x7")
+texture_progress = ExtResource("7_srpbi")
+texture_progress_offset = Vector2(9, 0)
