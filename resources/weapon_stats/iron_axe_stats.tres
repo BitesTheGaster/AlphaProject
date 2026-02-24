@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponStats" format=3 uid="uid://cif670rh3ir0p"]
+
+[ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="1_djvcx"]
+[ext_resource type="Script" uid="uid://cc88k7m5lh5ge" path="res://items/weapons/weapon_stats.gd" id="2_a4bc1"]
+
+[resource]
+script = ExtResource("2_a4bc1")
+damage = 20
+speed = 0.75
+hitbox = Vector2(24, 24)
+metadata/_custom_type_script = "uid://cc88k7m5lh5ge"

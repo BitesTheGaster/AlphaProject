@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://lslu2gdob3bn"]
+
+[ext_resource type="Script" uid="uid://bioql8u0ytv8k" path="res://enemies/enemy_stats.gd" id="1_s15jw"]
+[ext_resource type="Resource" uid="uid://cif670rh3ir0p" path="res://resources/weapon_stats/iron_axe_stats.tres" id="2_mrhcb"]
+
+[resource]
+script = ExtResource("1_s15jw")
+weapon_stats = ExtResource("2_mrhcb")
+metadata/_custom_type_script = "uid://bioql8u0ytv8k"

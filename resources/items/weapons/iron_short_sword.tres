@@ -7,6 +7,7 @@
 
 [sub_resource type="Resource" id="Resource_jpcx5"]
 script = ExtResource("4_671xe")
+speed = 1.3
 metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
 
 [resource]

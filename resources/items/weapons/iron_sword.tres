@@ -7,7 +7,8 @@
 
 [sub_resource type="Resource" id="Resource_nyrsj"]
 script = ExtResource("4_edsre")
-hitbox = Vector2(20, 30)
+damage = 15
+hitbox = Vector2(22, 32)
 metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
 
 [resource]

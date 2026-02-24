@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://x05v8hgfcr5q"]
+
+[ext_resource type="Script" uid="uid://cywp8pt8dxeb7" path="res://items/weapons/weapon.gd" id="1_jw6ui"]
+[ext_resource type="Texture2D" uid="uid://duqbr0guiepwk" path="res://art/Free - Raven Fantasy Icons/Separated Files/64x64/fc1465.png" id="2_e2hx1"]
+[ext_resource type="Resource" uid="uid://cif670rh3ir0p" path="res://resources/weapon_stats/iron_axe_stats.tres" id="3_wu7ly"]
+
+[resource]
+script = ExtResource("1_jw6ui")
+weapon_stats = ExtResource("3_wu7ly")
+item_name = "Iron axe"
+texture = ExtResource("2_e2hx1")
+metadata/_custom_type_script = "uid://cywp8pt8dxeb7"

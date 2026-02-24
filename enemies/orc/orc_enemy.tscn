@@ -7,6 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://dlsd75y14un5v" path="res://art/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc/Orc-Hurt.png" id="4_xmmhe"]
 [ext_resource type="Texture2D" uid="uid://bsxthe0eb27gp" path="res://art/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc/Orc-Idle.png" id="5_t35ew"]
 [ext_resource type="Texture2D" uid="uid://57krex21y0ou" path="res://art/Tiny RPG Character Asset Pack v1.03 -Free Soldier&Orc/Characters(100x100)/Orc/Orc/Orc-Walk.png" id="6_2lury"]
+[ext_resource type="Script" uid="uid://css20htut6q4c" path="res://enemies/enemy_state_machine.gd" id="8_xmmhe"]
+[ext_resource type="Script" uid="uid://drrtdkku0ku4p" path="res://enemies/orc/states/attack_orc_state.gd" id="9_2lury"]
+[ext_resource type="Script" uid="uid://hxl8864rqr6b" path="res://enemies/orc/states/idle_orc_state.gd" id="9_t35ew"]
+[ext_resource type="Script" uid="uid://dkpjgl2u213js" path="res://enemies/orc/states/move_enemy_state.gd" id="11_klwc4"]
+[ext_resource type="Script" uid="uid://d2vy7oind5vrm" path="res://enemies/orc/states/hurt_orc_state.gd" id="12_klwc4"]
+[ext_resource type="Script" uid="uid://bxbdycthw6cwl" path="res://enemies/orc/states/death_orc_state.gd" id="13_8jb5p"]
+[ext_resource type="Texture2D" uid="uid://ceu0tnxlitb6" path="res://art/UI/HealthBarUnder.png" id="13_bav7l"]
+[ext_resource type="Texture2D" uid="uid://bjl4cltmfhpgt" path="res://art/UI/HealthBarProgress.png" id="14_8jb5p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_klwc4"]
 radius = 5.0
@@ -290,25 +298,386 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Animation" id="Animation_xmmhe"]
+resource_name = "Attack1"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack1"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AxeAttacks/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8jb5p"]
+resource_name = "Attack2"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Attack2"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AxeAttacks/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.375, 0.625),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2lury"]
+resource_name = "Dead"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Dead"]
+}
+
+[sub_resource type="Animation" id="Animation_klwc4"]
+resource_name = "Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"Death", &"Dead"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kjne8"]
+resource_name = "Hurt"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Hurt"]
+}
+
+[sub_resource type="Animation" id="Animation_h010b"]
+resource_name = "Idle"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Idle"]
+}
+
+[sub_resource type="Animation" id="Animation_5ibc1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Run"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AxeAttacks/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HealthBar:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_bav7l"]
+resource_name = "Run"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Run"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmmhe"]
+_data = {
+&"Attack1": SubResource("Animation_xmmhe"),
+&"Attack2": SubResource("Animation_8jb5p"),
+&"Dead": SubResource("Animation_2lury"),
+&"Death": SubResource("Animation_klwc4"),
+&"Hurt": SubResource("Animation_kjne8"),
+&"Idle": SubResource("Animation_h010b"),
+&"RESET": SubResource("Animation_5ibc1"),
+&"Run": SubResource("Animation_bav7l")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2lury"]
+radius = 128.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_klwc4"]
+size = Vector2(24, 24)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2lury"]
+radius = 9.0
+height = 36.0
+
 [node name="OrcEnemy" type="CharacterBody2D" unique_id=1422445384 node_paths=PackedStringArray("nav_agent") groups=["enemy"]]
 y_sort_enabled = true
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_h010b")
 nav_agent = NodePath("NavigationAgent2D")
 metadata/_custom_type_script = "uid://dthx6auhod513"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1305568938]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_klwc4")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1766043031]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_avnpo")
-animation = &"Attack2"
-frame = 1
-frame_progress = 0.4789576
+animation = &"Run"
 offset = Vector2(0, -3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1173225126]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_xmmhe")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=654739543]
 avoidance_enabled = true
-debug_enabled = true
+
+[node name="EnemyStateMachine" type="Node" parent="." unique_id=1780941723 node_paths=PackedStringArray("enemy", "initial_state")]
+unique_name_in_owner = true
+script = ExtResource("8_xmmhe")
+enemy = NodePath("..")
+initial_state = NodePath("IdleOrcState")
+metadata/_custom_type_script = "uid://css20htut6q4c"
+
+[node name="AttackOrcState" type="Node" parent="EnemyStateMachine" unique_id=4982763 node_paths=PackedStringArray("enemy", "state_machine")]
+script = ExtResource("9_2lury")
+enemy = NodePath("../..")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://drrtdkku0ku4p"
+
+[node name="IdleOrcState" type="Node" parent="EnemyStateMachine" unique_id=796765452 node_paths=PackedStringArray("enemy", "state_machine")]
+script = ExtResource("9_t35ew")
+enemy = NodePath("../..")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://hxl8864rqr6b"
+
+[node name="MoveOrcState" type="Node" parent="EnemyStateMachine" unique_id=894001548 node_paths=PackedStringArray("enemy", "state_machine")]
+script = ExtResource("11_klwc4")
+enemy = NodePath("../..")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://dkpjgl2u213js"
+
+[node name="HurtOrcState" type="Node" parent="EnemyStateMachine" unique_id=1082620776 node_paths=PackedStringArray("enemy", "state_machine")]
+script = ExtResource("12_klwc4")
+enemy = NodePath("../..")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://d2vy7oind5vrm"
+
+[node name="DeathOrcState" type="Node" parent="EnemyStateMachine" unique_id=1962531386 node_paths=PackedStringArray("enemy", "state_machine")]
+script = ExtResource("13_8jb5p")
+enemy = NodePath("../..")
+state_machine = NodePath("..")
+metadata/_custom_type_script = "uid://bxbdycthw6cwl"
+
+[node name="AgroRange" type="Area2D" parent="." unique_id=534254225]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AgroRange" unique_id=446414645]
+shape = SubResource("CircleShape2D_2lury")
+debug_color = Color(0.71232146, 0.5380312, 5.7756904e-07, 0)
+
+[node name="AxeAttacks" type="Area2D" parent="." unique_id=154798681]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AxeAttacks" unique_id=1042018925]
+position = Vector2(12, 0)
+shape = SubResource("RectangleShape2D_klwc4")
+
+[node name="WanderTime" type="Timer" parent="." unique_id=2128205632]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="WaitTime" type="Timer" parent="." unique_id=464621527]
+unique_name_in_owner = true
+one_shot = true
+autostart = true
+
+[node name="AttackLength" type="Timer" parent="." unique_id=2067418981]
+unique_name_in_owner = true
+wait_time = 0.75
+one_shot = true
+
+[node name="DeadTime" type="Timer" parent="." unique_id=1040564310]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+
+[node name="HurtAnim" type="Timer" parent="." unique_id=870870927]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[node name="HitRange" type="Area2D" parent="." unique_id=1770736009]
+unique_name_in_owner = true
+
+[node name="HitRangeCollision" type="CollisionShape2D" parent="HitRange" unique_id=1619437971]
+unique_name_in_owner = true
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_2lury")
+debug_color = Color(0.71232146, 0.5380312, 5.7756904e-07, 0)
+
+[node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1647849117]
+unique_name_in_owner = true
+offset_left = -8.0
+offset_top = -23.0
+offset_right = 32.0
+offset_bottom = 17.0
+texture_under = ExtResource("13_bav7l")
+texture_progress = ExtResource("14_8jb5p")
+texture_progress_offset = Vector2(5, 0)
+
+[connection signal="navigation_finished" from="NavigationAgent2D" to="EnemyStateMachine/IdleOrcState" method="_on_navigation_agent_2d_navigation_finished"]
+[connection signal="body_entered" from="AgroRange" to="." method="_on_agro_range_body_entered"]
+[connection signal="body_exited" from="AgroRange" to="." method="_on_agro_range_body_exited"]
+[connection signal="timeout" from="WanderTime" to="EnemyStateMachine/IdleOrcState" method="_on_wander_time_timeout"]
+[connection signal="timeout" from="WaitTime" to="EnemyStateMachine/IdleOrcState" method="_on_wait_time_timeout"]
+[connection signal="timeout" from="AttackLength" to="EnemyStateMachine/AttackOrcState" method="_on_attack_length_timeout"]
+[connection signal="timeout" from="DeadTime" to="." method="_on_dead_time_timeout"]
+[connection signal="timeout" from="HurtAnim" to="EnemyStateMachine/HurtOrcState" method="_on_hurt_anim_timeout"]
+[connection signal="body_entered" from="HitRange" to="." method="_on_hit_range_body_entered"]

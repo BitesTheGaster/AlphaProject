@@ -11,7 +11,10 @@ func _ready() -> void:
 	player.open_inventory.connect(_on_player_open_inventory)
 	player.close_inventory.connect(_on_player_close_inventory)
 	_spawn_item(Vector2(256, 0), preload("res://resources/items/weapons/fire_sword.tres"))
-
+	
+	for child in get_children():
+		if child is Enemy:
+			child.died.connect(_spawn_item)
 
 func _on_player_open_inventory():
 	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE

@@ -29,6 +29,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func change_state(new_state: String):
+	var from: String = current_state.name
 	current_state.exit()
 	current_state = states[new_state]
 	current_state.enter()
+	var to: String = current_state.name

@@ -1,0 +1,46 @@
+class_name AttackOrcState
+extends EnemyState
+##
+
+
+func _ready() -> void:
+	name = "attack"
+
+
+func update(delta: float) -> void:
+	pass
+
+
+
+func physics_update(delta: float) -> void:
+	
+	enemy.move_and_slide()
+
+
+func update_input(event: InputEvent) -> void:
+	pass
+
+
+func enter() -> void:
+	enemy.velocity = Vector2.ZERO
+	
+	enemy.attack_length.wait_time = 0.875/enemy.stats.weapon_stats.speed
+	enemy.sprite.speed_scale = enemy.stats.weapon_stats.speed
+	enemy.animation_player.speed_scale = enemy.stats.weapon_stats.speed
+	
+	enemy.animation_player.play("Attack"+str(randi()%2+1))
+	enemy.attack_length.start()
+	
+	enemy.hit_range_collision.set_deferred("disabled", true)
+
+
+func exit() -> void:
+	enemy.sprite.speed_scale = 1
+	enemy.animation_player.speed_scale = 1
+	
+	enemy.hit_range_collision.set_deferred("disabled", false)
+
+
+func _on_attack_length_timeout() -> void:
+	if state_machine.current_state.name != "death":
+		state_machine.change_state("move")

@@ -7,3 +7,8 @@ extends Resource
 	
 ]
 @export var hitbox := Vector2(14, 20)
+
+
+func _init() -> void:
+	for i in range(0, len(applied_debuffs)):
+		applied_debuffs[i] = applied_debuffs[i].duplicate()

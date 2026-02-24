@@ -25,21 +25,20 @@ func enter() -> void:
 	# Dominant
 	player.animation_tree.set("callback_mode_discrete", 0)
 	
-	player.animation_tree.set("parameters/conditions/idle", false)
-	player.animation_tree.set("parameters/conditions/run", false)
-	player.animation_tree.set("parameters/conditions/attack", true)
-	
 	player.animation_tree.set("parameters/Attack/blend_position", 
 			player.last_dir)
-	
-	player.attack_length.start()
 	
 	player.attack_length.wait_time = 0.875/player.stats.weapon_stats.speed
 	player.sprite.speed_scale = player.stats.weapon_stats.speed
 	player.animation_player.speed_scale = player.stats.weapon_stats.speed
 	
 	player.close_inventory.emit()
-
+	
+	player.attack_length.start()
+	
+	player.animation_tree.set("parameters/conditions/idle", false)
+	player.animation_tree.set("parameters/conditions/run", false)
+	player.animation_tree.set("parameters/conditions/attack", true)
 
 func exit() -> void:
 	player.sprite.speed_scale = 1

@@ -9,6 +9,7 @@
 [sub_resource type="Resource" id="Resource_yhfxh"]
 script = ExtResource("4_oe7ri")
 duration = 2.0
+delay = 0.1
 metadata/_custom_type_script = "uid://clfh6ydif35ae"
 
 [sub_resource type="Resource" id="Resource_f7c7t"]
