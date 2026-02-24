@@ -13,9 +13,11 @@ func update(delta: float) -> void:
 			Input.get_axis("Up", "Down")
 	).normalized()
 	
-	if Input.is_action_pressed("Right"):
+	if Input.is_action_pressed("Right") and \
+			not Input.is_action_pressed("Left"):
 		player.last_dir = Vector2.RIGHT
-	elif Input.is_action_pressed("Left"):
+	elif Input.is_action_pressed("Left") and \
+			not Input.is_action_pressed("Right"):
 		player.last_dir = Vector2.LEFT
 	elif Input.is_action_pressed("Down"):
 		player.last_dir = Vector2.DOWN

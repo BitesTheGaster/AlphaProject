@@ -43,6 +43,11 @@ func enter() -> void:
 func exit() -> void:
 	player.sprite.speed_scale = 1
 	player.animation_player.speed_scale = 1
+	
+	player.attack_hibox_down.set_deferred("disabled", true)
+	player.attack_hibox_left.set_deferred("disabled", true)
+	player.attack_hibox_right.set_deferred("disabled", true)
+	player.attack_hibox_up.set_deferred("disabled", true)
 
 
 func _on_attack_length_timeout() -> void:

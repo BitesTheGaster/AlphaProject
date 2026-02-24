@@ -78,6 +78,10 @@ func update_attack_hitbox():
 	attack_hibox_left.position = Vector2(-pos, 0)
 	attack_hibox_right.position = Vector2(pos, 0)
 	attack_hibox_up.position = Vector2(0, -pos)
+	attack_hibox_down.set_deferred("disabled", true)
+	attack_hibox_left.set_deferred("disabled", true)
+	attack_hibox_right.set_deferred("disabled", true)
+	attack_hibox_up.set_deferred("disabled", true)
 
 
 func _on_death_time_timeout() -> void:

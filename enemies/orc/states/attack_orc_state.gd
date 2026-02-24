@@ -38,6 +38,7 @@ func exit() -> void:
 	enemy.sprite.speed_scale = 1
 	enemy.animation_player.speed_scale = 1
 	
+	enemy.axe_collision.set_deferred("disabled", true)
 	enemy.hit_range_collision.set_deferred("disabled", false)
 
 

@@ -21,7 +21,7 @@ signal died(global_pos: Vector2, item: Item)
 
 
 func _ready() -> void:
-	stats = preload("res://resources/orc_stats.tres")
+	stats = preload("res://resources/orc_stats.tres").duplicate()
 	
 	axe_collision.set_deferred("disabled", true)
 	

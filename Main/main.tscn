@@ -21,5 +21,23 @@ zoom = Vector2(4, 4)
 [node name="OrcEnemy" parent="." unique_id=1422445384 instance=ExtResource("3_xwkvk")]
 position = Vector2(-150, 70)
 
+[node name="OrcEnemy2" parent="." unique_id=424312842 instance=ExtResource("3_xwkvk")]
+position = Vector2(-141, 137)
+
+[node name="OrcEnemy3" parent="." unique_id=2006205221 instance=ExtResource("3_xwkvk")]
+position = Vector2(-39, 165)
+
+[node name="OrcEnemy4" parent="." unique_id=315899027 instance=ExtResource("3_xwkvk")]
+position = Vector2(124, 180)
+
+[node name="OrcEnemy5" parent="." unique_id=1053139227 instance=ExtResource("3_xwkvk")]
+position = Vector2(265, -36)
+
+[node name="OrcEnemy6" parent="." unique_id=417168536 instance=ExtResource("3_xwkvk")]
+position = Vector2(195, 6)
+
+[node name="OrcEnemy7" parent="." unique_id=1338967960 instance=ExtResource("3_xwkvk")]
+position = Vector2(-137, -22)
+
 [node name="Hud" parent="." unique_id=594341442 instance=ExtResource("4_c651c")]
 unique_name_in_owner = true

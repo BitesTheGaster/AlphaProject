@@ -223,7 +223,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "value"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath("Sprite:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -1692,6 +1692,7 @@ parameters/Run/blend_position = Vector2(0.0066945553, -0.4545455)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791675351]
 unique_name_in_owner = true
+deterministic = true
 libraries/ = SubResource("AnimationLibrary_fhl08")
 libraries/Death = SubResource("AnimationLibrary_uw77l")
 libraries/PlayerAttacks = SubResource("AnimationLibrary_knn7v")
