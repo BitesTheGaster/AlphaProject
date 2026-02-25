@@ -31,6 +31,7 @@ var shirt_modulate: Color
 @onready var attack_hibox_up: CollisionShape2D = %Up
 @onready var attack_start: Timer = %AttackStart
 @onready var attack_end: Timer = %AttackEnd
+@onready var attack_particles: CPUParticles2D = %AttackParticles
 
 
 func _ready() -> void:	

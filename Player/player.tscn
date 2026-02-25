@@ -9,8 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://31ob7gc1h0cq" path="res://art/RPG_Hero/attack_right_hair_fix.png" id="6_2ieo8"]
 [ext_resource type="Script" uid="uid://ds0wxaiw7eujl" path="res://player/states/move_player_state.gd" id="6_vtle1"]
 [ext_resource type="Texture2D" uid="uid://3x3yg1js8r7c" path="res://art/RPG_Hero/idle.png" id="10_c35mf"]
+[ext_resource type="Texture2D" uid="uid://d0rykor64ubod" path="res://art/UI/smoke.png" id="12_ebec5"]
 [ext_resource type="Script" uid="uid://c4qtufferjitw" path="res://player/states/attack_player_state.gd" id="19_x7c3f"]
 [ext_resource type="Script" uid="uid://bm38raylp7l7y" path="res://player/states/death_player_state.gd" id="22_bjvpn"]
+
+[sub_resource type="Gradient" id="Gradient_ebec5"]
+offsets = PackedFloat32Array(0, 0.33333334, 0.6666667, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+metadata/_snap_count = 3
+metadata/_snap_enabled = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yw30f"]
 radius = 5.0
@@ -5243,6 +5250,18 @@ size = Vector2(14, 20)
 [node name="Player" type="CharacterBody2D" unique_id=1479232073 groups=["player"]]
 y_sort_enabled = true
 script = ExtResource("1_l8h54")
+
+[node name="AttackParticles" type="CPUParticles2D" parent="." unique_id=319846516]
+unique_name_in_owner = true
+emitting = false
+amount = 1
+texture = ExtResource("12_ebec5")
+lifetime = 0.09999999999999999
+one_shot = true
+explosiveness = 0.9
+local_coords = true
+gravity = Vector2(0, 0)
+color_ramp = SubResource("Gradient_ebec5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=695042137]
 shape = SubResource("CircleShape2D_yw30f")

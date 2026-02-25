@@ -88,11 +88,41 @@ func _on_attack_start_timeout() -> void:
 	if state_machine.current_state.name != "attack":
 		return
 	
+	var lifetime: float = player.attack_end.wait_time\
+			- player.attack_start.wait_time
+	player.attack_particles.lifetime = lifetime
+	
 	if player.sprite.animation == "AttackDown":
 		player.attack_hibox_down.set_deferred("disabled", false)
+		player.attack_particles.scale = \
+				player.stats.weapon_stats.hitbox/Vector2(14, 20)
+		player.attack_particles.position = \
+				player.attack_hibox_down.position
+		player.attack_particles.rotation = deg_to_rad(180)
+	
 	elif player.sprite.animation == "AttackLeft":
 		player.attack_hibox_left.set_deferred("disabled", false)
+		player.attack_particles.scale = \
+				player.stats.weapon_stats.hitbox/Vector2(14, 20)
+		player.attack_particles.position = \
+				player.attack_hibox_left.position
+		player.attack_particles.rotation = deg_to_rad(-90)
+	
 	elif player.sprite.animation == "AttackRight":
 		player.attack_hibox_right.set_deferred("disabled", false)
+		player.attack_particles.scale = \
+				player.stats.weapon_stats.hitbox/Vector2(14, 20)
+		player.attack_particles.position = \
+				player.attack_hibox_right.position
+		player.attack_particles.rotation = deg_to_rad(90)
+	
 	elif player.sprite.animation == "AttackUp":
 		player.attack_hibox_up.set_deferred("disabled", false)
+		player.attack_particles.scale = \
+				player.stats.weapon_stats.hitbox/Vector2(14, 20)
+		player.attack_particles.position = \
+				player.attack_hibox_up.position
+		player.attack_particles.rotation = deg_to_rad(0)
+	
+	player.attack_particles.modulate = player.attack.modulate
+	player.attack_particles.emitting = true
