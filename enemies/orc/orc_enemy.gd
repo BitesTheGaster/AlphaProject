@@ -18,6 +18,8 @@ signal died(global_pos: Vector2, item: Item)
 @onready var health_bar: TextureProgressBar = %HealthBar
 @onready var collision: CollisionShape2D = %CollisionShape2D
 @onready var axe_collision: CollisionShape2D = %AxeCollisionShape
+@onready var attack_start: Timer = %AttackStart
+@onready var attack_end: Timer = %AttackEnd
 
 
 func _ready() -> void:
@@ -34,7 +36,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	# Flip enemy
-	if state_machine.current_state.name != "attack":
+	if state_machine.current_state.name != "attack" and \
+			state_machine.current_state.name != "death":
 		if move_dir.x < 0:
 			sprite.flip_h = true
 			axe_attacks.scale = Vector2(-1, 1)
@@ -85,7 +88,8 @@ func take_damage_from_weapon(weapon_stats: WeaponStats):
 	stats.health -= weapon_stats.damage
 	for debuff in weapon_stats.applied_debuffs:
 		stats.current_debuffs.append(debuff.duplicate())
-	state_machine.change_state("hurt")
 	health_bar.value = stats.health
 	if stats.health <= 0:
 		state_machine.change_state("death")
+	else:
+		state_machine.change_state("hurt")

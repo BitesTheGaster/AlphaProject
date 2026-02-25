@@ -1,7 +1,9 @@
 [gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://utvpvdnubabk"]
 
 [ext_resource type="Script" uid="uid://duxiibe011slr" path="res://player/player_stats.gd" id="1_t35kn"]
+[ext_resource type="Resource" uid="uid://d0y666eokkhem" path="res://resources/weapon_stats/iron_short_sword_stats.tres" id="2_wjo15"]
 
 [resource]
 script = ExtResource("1_t35kn")
+weapon_stats = ExtResource("2_wjo15")
 metadata/_custom_type_script = "uid://duxiibe011slr"

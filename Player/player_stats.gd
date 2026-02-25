@@ -2,7 +2,10 @@ class_name PlayerStats
 extends Resource
 ##
 
-var speed: float = 70.0
-var max_health: int = 100
+@export var speed: float = 70.0
+@export var max_health: int = 100
 var health: int = max_health
-var weapon_stats: WeaponStats = WeaponStats.new().duplicate()
+@export var weapon_stats: WeaponStats = WeaponStats.new().duplicate()
+var current_debuffs: Array[Debuff] = [
+	
+]

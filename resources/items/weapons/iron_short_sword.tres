@@ -2,17 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cywp8pt8dxeb7" path="res://items/weapons/weapon.gd" id="1_050sx"]
 [ext_resource type="Texture2D" uid="uid://6evefb3mpn0h" path="res://art/Free - Raven Fantasy Icons/Separated Files/64x64/fc1441.png" id="2_050sx"]
-[ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="3_kipvg"]
-[ext_resource type="Script" uid="uid://cc88k7m5lh5ge" path="res://items/weapons/weapon_stats.gd" id="4_671xe"]
-
-[sub_resource type="Resource" id="Resource_jpcx5"]
-script = ExtResource("4_671xe")
-speed = 1.3
-metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
+[ext_resource type="Resource" uid="uid://d0y666eokkhem" path="res://resources/weapon_stats/iron_short_sword_stats.tres" id="3_0ok8r"]
 
 [resource]
 script = ExtResource("1_050sx")
-weapon_stats = SubResource("Resource_jpcx5")
+weapon_stats = ExtResource("3_0ok8r")
 item_name = "Iron short sword"
 texture = ExtResource("2_050sx")
 metadata/_custom_type_script = "uid://cywp8pt8dxeb7"

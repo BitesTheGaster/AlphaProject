@@ -1,10 +1,8 @@
-class_name FireDebuff
+class_name DPSDebuff
 extends Debuff
 ##
 
-@export var start_damage: int = 1
-
-var current_damage: int = start_damage
+@export var damage: int
 
 
 func apply_debuff(target: CharacterBody2D, delta: float):
@@ -15,5 +13,4 @@ func apply_debuff(target: CharacterBody2D, delta: float):
 	if time > delay:
 		time -= delay
 		if target is Enemy or target is Player:
-			target.take_damage(current_damage)
-			current_damage += 1
+			target.take_damage(damage)

@@ -3,18 +3,12 @@
 [ext_resource type="Script" uid="uid://cywp8pt8dxeb7" path="res://items/weapons/weapon.gd" id="1_gewds"]
 [ext_resource type="Texture2D" uid="uid://dfwigctp3ykqb" path="res://art/Free - Raven Fantasy Icons/Separated Files/64x64/fc1681.png" id="2_yhfxh"]
 [ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="3_supcp"]
-[ext_resource type="Script" uid="uid://clfh6ydif35ae" path="res://items/debuffs/fire_debuff.gd" id="4_oe7ri"]
+[ext_resource type="Resource" uid="uid://be6phkxxv5cck" path="res://resources/debuffs/fire_debuff.tres" id="4_yhfxh"]
 [ext_resource type="Script" uid="uid://cc88k7m5lh5ge" path="res://items/weapons/weapon_stats.gd" id="5_mc1lw"]
-
-[sub_resource type="Resource" id="Resource_yhfxh"]
-script = ExtResource("4_oe7ri")
-duration = 2.0
-delay = 0.1
-metadata/_custom_type_script = "uid://clfh6ydif35ae"
 
 [sub_resource type="Resource" id="Resource_f7c7t"]
 script = ExtResource("5_mc1lw")
-applied_debuffs = Array[ExtResource("3_supcp")]([SubResource("Resource_yhfxh")])
+applied_debuffs = Array[ExtResource("3_supcp")]([ExtResource("4_yhfxh")])
 metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
 
 [resource]

@@ -224,7 +224,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q75pb")
 }],
-"loop": true,
+"loop": false,
 "name": &"Death",
 "speed": 4.0
 }, {
@@ -316,22 +316,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AxeAttacks/AxeCollisionShape:disabled")
+tracks/1/path = NodePath("Sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.375, 0.625),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -356,22 +344,10 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AxeAttacks/AxeCollisionShape:disabled")
+tracks/1/path = NodePath("Sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.375, 0.625),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -481,35 +457,23 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AxeAttacks/AxeCollisionShape:disabled")
+tracks/1/enabled = false
+tracks/1/path = NodePath("Sprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = false
-tracks/2/path = NodePath("Sprite:frame")
+tracks/2/enabled = true
+tracks/2/path = NodePath("HealthBar:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HealthBar:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -676,6 +640,16 @@ texture_under = ExtResource("13_bav7l")
 texture_progress = ExtResource("14_8jb5p")
 texture_progress_offset = Vector2(5, 0)
 
+[node name="AttackStart" type="Timer" parent="." unique_id=1733610528]
+unique_name_in_owner = true
+wait_time = 0.375
+one_shot = true
+
+[node name="AttackEnd" type="Timer" parent="." unique_id=1228145580]
+unique_name_in_owner = true
+wait_time = 0.625
+one_shot = true
+
 [connection signal="navigation_finished" from="NavigationAgent2D" to="EnemyStateMachine/IdleOrcState" method="_on_navigation_agent_2d_navigation_finished"]
 [connection signal="body_entered" from="AgroRange" to="." method="_on_agro_range_body_entered"]
 [connection signal="body_exited" from="AgroRange" to="." method="_on_agro_range_body_exited"]
@@ -686,3 +660,5 @@ texture_progress_offset = Vector2(5, 0)
 [connection signal="timeout" from="DeadTime" to="." method="_on_dead_time_timeout"]
 [connection signal="timeout" from="HurtAnim" to="EnemyStateMachine/HurtOrcState" method="_on_hurt_anim_timeout"]
 [connection signal="body_entered" from="HitRange" to="." method="_on_hit_range_body_entered"]
+[connection signal="timeout" from="AttackStart" to="EnemyStateMachine/AttackOrcState" method="_on_attack_start_timeout"]
+[connection signal="timeout" from="AttackEnd" to="EnemyStateMachine/AttackOrcState" method="_on_attack_end_timeout"]

@@ -23,7 +23,7 @@ func update_input(event: InputEvent) -> void:
 
 
 func enter() -> void:
-	enemy.animation_player.play("Hurt")
+	enemy.animation_player.call_deferred("play", "Hurt")
 	enemy.hurt_anim.start()
 
 func exit() -> void:

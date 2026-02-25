@@ -2,8 +2,8 @@ class_name Debuff
 extends Resource
 ##
 
-@export var duration: float = 1.0
-@export var delay: float = 0.5
+@export var duration: float
+@export var delay: float
 
 var time: float = 0.0
 

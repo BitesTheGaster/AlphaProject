@@ -14,6 +14,10 @@ var inventory_opened: bool = false
 
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var sprite: AnimatedSprite2D = %Sprite
+@onready var hair: AnimatedSprite2D = %Hair
+@onready var pants: AnimatedSprite2D = %Pants
+@onready var shirt: AnimatedSprite2D = %Shirt
+@onready var attack: AnimatedSprite2D = %Attack
 @onready var attack_length: Timer = %AttackLength
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var state_machine: PlayerStateMachine = %PlayerStateMachine
@@ -21,10 +25,16 @@ var inventory_opened: bool = false
 @onready var attack_hibox_left: CollisionShape2D = %Left
 @onready var attack_hibox_right: CollisionShape2D = %Right
 @onready var attack_hibox_up: CollisionShape2D = %Up
+@onready var attack_start: Timer = %AttackStart
+@onready var attack_end: Timer = %AttackEnd
 
 
 func _ready() -> void:	
 	sprite.play("IdleDown")
+	hair.play("IdleDown")
+	pants.play("IdleDown")
+	shirt.play("IdleDown")
+	attack.play("Nothing")
 	animation_tree.active = true
 
 
@@ -40,6 +50,12 @@ func _process(delta: float) -> void:
 			inventory_opened:
 		inventory_opened = false
 		close_inventory.emit()
+	
+	if state_machine.current_state.name != "attack" and \
+			attack.animation != "Nothing":
+		attack.play("Nothing")
+	
+	update_debuffs(delta)
 
 
 func take_damage(damage: int):
@@ -87,3 +103,10 @@ func update_attack_hitbox():
 func _on_death_time_timeout() -> void:
 	
 	self.queue_free()
+
+
+func update_debuffs(delta: float):
+	for debuff in stats.current_debuffs:
+		debuff.apply_debuff(self, delta)
+		if not debuff.is_active():
+			stats.current_debuffs.erase(debuff)
