@@ -48,6 +48,9 @@ func enter() -> void:
 	player.attack_length.start()
 	player.attack_start.start()
 	player.attack_end.start()
+	
+	player.attack.modulate = player.stats.weapon_stats.slash_color
+
 
 func exit() -> void:
 	player.sprite.speed_scale = 1

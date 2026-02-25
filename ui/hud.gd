@@ -7,7 +7,7 @@ var _item_sprites: Dictionary[int, Sprite2D]
 @onready var weapon_sprite: Sprite2D = %WeaponSprite
 @onready var tooltip: Label = %Tooltip
 @onready var item_slots: Sprite2D = %ItemSlots
-@onready var player: Player = %Player
+@onready var player: Player
 @onready var inventory: Sprite2D = %Inventory
 @onready var health_bar: TextureProgressBar = %HealthBar
 

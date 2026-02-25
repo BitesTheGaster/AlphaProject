@@ -9,6 +9,7 @@
 script = ExtResource("4_fyjw7")
 damage = 13
 speed = 1.5
+slash_color = Color(1, 0.85569996, 0.39115557, 1)
 metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
 
 [resource]

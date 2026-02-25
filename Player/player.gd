@@ -12,6 +12,10 @@ var last_dir := Vector2.DOWN
 var input_dir: Vector2
 var inventory_opened: bool = false
 
+var hair_modulate: Color
+var pants_modulate: Color
+var shirt_modulate: Color
+
 @onready var animation_tree: AnimationTree = %AnimationTree
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var hair: AnimatedSprite2D = %Hair
@@ -32,8 +36,11 @@ var inventory_opened: bool = false
 func _ready() -> void:	
 	sprite.play("IdleDown")
 	hair.play("IdleDown")
+	hair.modulate = hair_modulate
 	pants.play("IdleDown")
+	pants.modulate = pants_modulate
 	shirt.play("IdleDown")
+	shirt.modulate = shirt_modulate
 	attack.play("Nothing")
 	animation_tree.active = true
 

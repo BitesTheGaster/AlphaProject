@@ -1,21 +1,16 @@
 [gd_scene format=3 uid="uid://bgneytkun0o4c"]
 
 [ext_resource type="Script" uid="uid://cqw0usj8ocvkw" path="res://main/main.gd" id="1_3wy1v"]
-[ext_resource type="PackedScene" uid="uid://bitdylwr4ey0o" path="res://player/player.tscn" id="1_53q0u"]
-[ext_resource type="PackedScene" uid="uid://cfevt4bao3dm6" path="res://main/rooms/room.tscn" id="2_pjrb6"]
+[ext_resource type="PackedScene" uid="uid://btvcsp0rpq1v3" path="res://main/main_menu.tscn" id="3_xwkvk"]
 [ext_resource type="PackedScene" uid="uid://bietkelq82yro" path="res://ui/hud.tscn" id="4_c651c"]
 
 [node name="Main" type="Node2D" unique_id=567999151]
 y_sort_enabled = true
 script = ExtResource("1_3wy1v")
 
-[node name="Player" parent="." unique_id=1479232073 instance=ExtResource("1_53q0u")]
-unique_name_in_owner = true
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1105043610]
-zoom = Vector2(4, 4)
-
-[node name="Room" parent="." unique_id=207893912 instance=ExtResource("2_pjrb6")]
-
 [node name="Hud" parent="." unique_id=594341442 instance=ExtResource("4_c651c")]
+unique_name_in_owner = true
+visible = false
+
+[node name="MainMenu" parent="." unique_id=1495591544 instance=ExtResource("3_xwkvk")]
 unique_name_in_owner = true

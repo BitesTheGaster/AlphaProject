@@ -1,19 +1,20 @@
 extends Node2D
 ## Main logic script
 
+@onready var room_scene = preload("res://main/rooms/room.tscn")
+@onready var player_scene = preload("res://player/player.tscn")
 @onready var dropped_item_scene = preload("res://items/dropped_item.tscn")
-@onready var player = %Player
-@onready var hud = %Hud
+@onready var hud: Hud = %Hud
+@onready var main_menu: MainMenu = %MainMenu
 
+var player: Player
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_HIDDEN
+	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
+	hud.hide()
+	main_menu.start.pressed.connect(_start_game)
 	
-	player.open_inventory.connect(_on_player_open_inventory)
-	player.close_inventory.connect(_on_player_close_inventory)
-	player.health_changed.connect(hud.on_player_health_changed)
-	
-	_spawn_item(Vector2(256, 0), preload("res://resources/items/weapons/fire_sword.tres"))
+	# Надо перенести эту хрень
 	for child in get_children():
 		if child is Enemy:
 			child.died.connect(_spawn_item)
@@ -45,3 +46,27 @@ func _pickup_item(dropped_item: DroppedItem, item: Item):
 		Global.inventory.items[free_slot] = item
 		dropped_item.queue_free()
 		hud.update_textures()
+
+
+func _start_game():
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	
+	main_menu.hide()
+	hud.show()
+	
+	var room: Node2D = room_scene.instantiate()
+	room.position = Vector2.ZERO
+	#room.generate()
+	add_child(room)
+	
+	player = player_scene.instantiate()
+	player.open_inventory.connect(_on_player_open_inventory)
+	player.close_inventory.connect(_on_player_close_inventory)
+	player.health_changed.connect(hud.on_player_health_changed)
+	player.position = Vector2.ZERO
+	player.hair_modulate = main_menu.hair.modulate
+	player.shirt_modulate = main_menu.shirt.modulate
+	player.pants_modulate = main_menu.pants.modulate
+	add_child(player)
+	
+	hud.player = player

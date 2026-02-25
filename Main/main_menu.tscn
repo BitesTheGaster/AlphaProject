@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://btvcsp0rpq1v3"]
+
+[ext_resource type="Script" uid="uid://bhaw5rrromi5c" path="res://main/main_menu.gd" id="1_4u0aa"]
+[ext_resource type="Texture2D" uid="uid://c0ap4oorvtq3l" path="res://art/UI/StartNormal.png" id="1_w2mlq"]
+[ext_resource type="Texture2D" uid="uid://bj2bhp25c8ej7" path="res://art/UI/StartPressed.png" id="2_4u0aa"]
+[ext_resource type="Texture2D" uid="uid://3x3yg1js8r7c" path="res://art/RPG_Hero/idle.png" id="3_w2mlq"]
+
+[node name="MainMenu" type="CanvasLayer" unique_id=1495591544]
+script = ExtResource("1_4u0aa")
+
+[node name="Start" type="TextureButton" parent="." unique_id=1605354801]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -16.0
+offset_right = 32.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(32, 16)
+texture_normal = ExtResource("1_w2mlq")
+texture_pressed = ExtResource("2_4u0aa")
+
+[node name="HairColor" type="ColorPickerButton" parent="." unique_id=577401401]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = 60.0
+offset_right = -20.0
+offset_bottom = 92.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 1)
+
+[node name="ShirtColor" type="ColorPickerButton" parent="." unique_id=1906987919]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = 92.0
+offset_right = -20.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 1)
+
+[node name="PantsColor" type="ColorPickerButton" parent="." unique_id=2053881585]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = 124.0
+offset_right = -20.0
+offset_bottom = 156.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Hair" type="Sprite2D" parent="." unique_id=1267476829]
+unique_name_in_owner = true
+position = Vector2(998, 652)
+scale = Vector2(4, 4)
+texture = ExtResource("3_w2mlq")
+region_enabled = true
+region_rect = Rect2(10, 169, 21, 24)
+
+[node name="Pants" type="Sprite2D" parent="." unique_id=1772466611]
+unique_name_in_owner = true
+position = Vector2(998, 652)
+scale = Vector2(4, 4)
+texture = ExtResource("3_w2mlq")
+region_enabled = true
+region_rect = Rect2(10, 329, 21, 24)
+
+[node name="Shirt" type="Sprite2D" parent="." unique_id=204056337]
+unique_name_in_owner = true
+position = Vector2(998, 652)
+scale = Vector2(4, 4)
+texture = ExtResource("3_w2mlq")
+region_enabled = true
+region_rect = Rect2(10, 489, 21, 24)
+
+[node name="Player" type="Sprite2D" parent="." unique_id=125735706]
+unique_name_in_owner = true
+position = Vector2(998, 652)
+scale = Vector2(4, 4)
+texture = ExtResource("3_w2mlq")
+region_enabled = true
+region_rect = Rect2(10, 9, 21, 24)
+
+[connection signal="color_changed" from="HairColor" to="." method="_on_hair_color_color_changed"]
+[connection signal="color_changed" from="ShirtColor" to="." method="_on_shirt_color_color_changed"]
+[connection signal="color_changed" from="PantsColor" to="." method="_on_pants_color_color_changed"]

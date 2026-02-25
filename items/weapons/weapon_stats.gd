@@ -7,7 +7,7 @@ extends Resource
 	
 ]
 @export var hitbox := Vector2(14, 20)
-
+@export var slash_color := Color.WHITE
 
 func _init() -> void:
 	for i in range(0, len(applied_debuffs)):
