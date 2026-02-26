@@ -632,6 +632,7 @@ debug_color = Color(0.71232146, 0.5380312, 5.7756904e-07, 0)
 
 [node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1647849117]
 unique_name_in_owner = true
+z_index = 1
 offset_left = -8.0
 offset_top = -23.0
 offset_right = 32.0

@@ -13,11 +13,6 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
 	hud.hide()
 	main_menu.start.pressed.connect(_start_game)
-	
-	# Надо перенести эту хрень
-	for child in get_children():
-		if child is Enemy:
-			child.died.connect(_spawn_item)
 
 func _on_player_open_inventory():
 	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
@@ -54,10 +49,11 @@ func _start_game():
 	main_menu.hide()
 	hud.show()
 	
-	var room: Node2D = room_scene.instantiate()
+	var room: Room = room_scene.instantiate()
 	room.position = Vector2.ZERO
-	#room.generate()
 	add_child(room)
+	room.spawn_orc.connect(_spawn_orc)
+	room.generate(Vector2i(3, 3))
 	
 	player = player_scene.instantiate()
 	player.open_inventory.connect(_on_player_open_inventory)
@@ -70,3 +66,8 @@ func _start_game():
 	add_child(player)
 	
 	hud.player = player
+
+
+func _spawn_orc(orc: OrcEnemy):
+	add_child(orc)
+	orc.died.connect(_spawn_item)

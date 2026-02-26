@@ -35,14 +35,9 @@ var shirt_modulate: Color
 
 
 func _ready() -> void:	
-	sprite.play("IdleDown")
-	hair.play("IdleDown")
 	hair.modulate = hair_modulate
-	pants.play("IdleDown")
 	pants.modulate = pants_modulate
-	shirt.play("IdleDown")
 	shirt.modulate = shirt_modulate
-	attack.play("Nothing")
 	animation_tree.active = true
 
 

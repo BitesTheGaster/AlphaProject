@@ -16,21 +16,24 @@ outline_color = Color(0, 0, 0, 1)
 [node name="Hud" type="CanvasLayer" unique_id=594341442]
 script = ExtResource("1_546lt")
 
-[node name="Inventory" type="Sprite2D" parent="." unique_id=660413149]
-unique_name_in_owner = true
-visible = false
-position = Vector2(544, 284)
-texture = ExtResource("1_276te")
-offset = Vector2(432, 272)
-
-[node name="WeaponSlot" type="Sprite2D" parent="Inventory" unique_id=2121923305]
-position = Vector2(0, 480)
+[node name="WeaponSlot" type="Sprite2D" parent="." unique_id=2121923305]
+position = Vector2(544, 1000)
 texture = ExtResource("1_rbyyf")
 offset = Vector2(32, 32)
 
-[node name="WeaponSprite" type="Sprite2D" parent="Inventory/WeaponSlot" unique_id=1251435134]
+[node name="WeaponSprite" type="Sprite2D" parent="WeaponSlot" unique_id=1251435134]
 unique_name_in_owner = true
 position = Vector2(32, 32)
+
+[node name="Hotbar" type="Sprite2D" parent="." unique_id=1290662051]
+position = Vector2(532, 988)
+
+[node name="Inventory" type="Sprite2D" parent="." unique_id=660413149]
+unique_name_in_owner = true
+visible = false
+position = Vector2(544, 604)
+texture = ExtResource("1_276te")
+offset = Vector2(432, 272)
 
 [node name="ItemSlots" type="Sprite2D" parent="Inventory" unique_id=1145691456]
 unique_name_in_owner = true

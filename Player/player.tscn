@@ -165,7 +165,7 @@ states/Run/node = SubResource("AnimationNodeBlendSpace2D_x3vf3")
 states/Run/position = Vector2(510.576, 174.40001)
 states/Start/position = Vector2(170.40001, 80.73139)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_apopc"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_btcbx"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_qjkh3"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_rptt4"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_r7pn3"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_7pqkx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_uw77l"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_s7qer"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_g4c7l"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_knn7v")]
-graph_offset = Vector2(14.926971, -35)
+graph_offset = Vector2(-70.07303, -153)
 
 [sub_resource type="Animation" id="Animation_btcbx"]
 length = 0.001
@@ -5256,7 +5256,7 @@ unique_name_in_owner = true
 emitting = false
 amount = 1
 texture = ExtResource("12_ebec5")
-lifetime = 0.09999999999999999
+lifetime = 0.1
 one_shot = true
 explosiveness = 0.9
 local_coords = true
@@ -5279,7 +5279,7 @@ parameters/conditions/idle = false
 parameters/conditions/run = false
 parameters/Attack/blend_position = Vector2(-0.0036730766, 1.090909)
 parameters/Death/blend_position = Vector2(0, 0)
-parameters/Idle/blend_position = Vector2(0.0073461533, 0.2651515)
+parameters/Idle/blend_position = Vector2(-0.5430403, -0.5429553)
 parameters/Run/blend_position = Vector2(0.0066945553, -0.4545455)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1791675351]
@@ -5293,31 +5293,36 @@ libraries/PlayerMovement = SubResource("AnimationLibrary_5htga")
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1261945476]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_bbimk")
-animation = &"DeathUp"
+animation = &"IdleDown"
+autoplay = "IdleDown"
 offset = Vector2(0, -7)
 
 [node name="Hair" type="AnimatedSprite2D" parent="Sprite" unique_id=1680185382]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_c35mf")
-animation = &"AttackUp"
+animation = &"IdleDown"
+autoplay = "IdleDown"
 offset = Vector2(0, -7)
 
 [node name="Pants" type="AnimatedSprite2D" parent="Sprite" unique_id=2121333834]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_mteo0")
-animation = &"AttackUp"
+animation = &"IdleDown"
+autoplay = "IdleDown"
 offset = Vector2(0, -7)
 
 [node name="Shirt" type="AnimatedSprite2D" parent="Sprite" unique_id=788130916]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_65viv")
-animation = &"AttackUp"
+animation = &"IdleDown"
+autoplay = "IdleDown"
 offset = Vector2(0, -7)
 
 [node name="Attack" type="AnimatedSprite2D" parent="Sprite" unique_id=235172568]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_rgyib")
-animation = &"AttackUp"
+animation = &"Nothing"
+autoplay = "Nothing"
 offset = Vector2(0, -7)
 
 [node name="PlayerStateMachine" type="Node" parent="." unique_id=929530361 node_paths=PackedStringArray("player", "initial_state")]
