@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://be12ewrcb6ki2" path="res://art/P_P_FREE_RPG_TILESET/Dungeon_24x24.png" id="1_1nc60"]
 [ext_resource type="Script" uid="uid://cx1bxx054u7vt" path="res://main/rooms/room.gd" id="1_25gao"]
 [ext_resource type="TileSet" uid="uid://bdw7jvpu1cmq0" path="res://decor.tres" id="3_25gao"]
+[ext_resource type="Script" uid="uid://dye1ah7oglb3" path="res://main/rooms/decor.gd" id="4_tgn16"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tgn16"]
 texture = ExtResource("1_1nc60")
@@ -650,3 +651,4 @@ tile_set = SubResource("TileSet_kepd1")
 unique_name_in_owner = true
 y_sort_enabled = true
 tile_set = ExtResource("3_25gao")
+script = ExtResource("4_tgn16")

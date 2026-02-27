@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="LootTable" format=3 uid="uid://dyms28l3gcj8a"]
+
+[ext_resource type="Script" uid="uid://svfjbaof8qg4" path="res://loot_tables/item_drop.gd" id="1_hsvqe"]
+[ext_resource type="Resource" uid="uid://bdo20xdoac3jx" path="res://resources/items/weapons/fire_sword.tres" id="2_nqsil"]
+[ext_resource type="Script" uid="uid://djmoo36gotsef" path="res://loot_tables/loot_table.gd" id="2_slnoi"]
+[ext_resource type="Resource" uid="uid://bx17o4w2d0mcd" path="res://resources/items/weapons/iron_sword.tres" id="3_8t8r5"]
+[ext_resource type="Resource" uid="uid://dh8pnru2lomoa" path="res://resources/items/weapons/golden_short_sword.tres" id="4_vmtyo"]
+
+[sub_resource type="Resource" id="Resource_k5jhb"]
+script = ExtResource("1_hsvqe")
+item = ExtResource("2_nqsil")
+weight = 0.1
+chance = 0.2
+metadata/_custom_type_script = "uid://svfjbaof8qg4"
+
+[sub_resource type="Resource" id="Resource_nbx32"]
+script = ExtResource("1_hsvqe")
+item = ExtResource("3_8t8r5")
+metadata/_custom_type_script = "uid://svfjbaof8qg4"
+
+[sub_resource type="Resource" id="Resource_ok5xm"]
+script = ExtResource("1_hsvqe")
+item = ExtResource("4_vmtyo")
+weight = 0.2
+chance = 0.3
+metadata/_custom_type_script = "uid://svfjbaof8qg4"
+
+[resource]
+script = ExtResource("2_slnoi")
+drops = Array[ExtResource("1_hsvqe")]([SubResource("Resource_k5jhb"), SubResource("Resource_nbx32"), SubResource("Resource_ok5xm")])
+max_drops = 2
+luck_scaling = 0.5
+metadata/_custom_type_script = "uid://djmoo36gotsef"

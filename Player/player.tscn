@@ -5411,6 +5411,7 @@ one_shot = true
 zoom = Vector2(4, 4)
 
 [connection signal="body_entered" from="SwordAttacks" to="PlayerStateMachine/AttackPlayerState" method="_on_sword_attacks_body_entered"]
+[connection signal="body_shape_entered" from="SwordAttacks" to="PlayerStateMachine/AttackPlayerState" method="_on_sword_attacks_body_shape_entered"]
 [connection signal="timeout" from="AttackLength" to="PlayerStateMachine/AttackPlayerState" method="_on_attack_length_timeout"]
 [connection signal="timeout" from="DeathTime" to="." method="_on_death_time_timeout"]
 [connection signal="timeout" from="AttackStart" to="PlayerStateMachine/AttackPlayerState" method="_on_attack_start_timeout"]

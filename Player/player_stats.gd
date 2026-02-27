@@ -9,3 +9,4 @@ var health: int = max_health
 var current_debuffs: Array[Debuff] = [
 	
 ]
+@export var luck: float = 0.5

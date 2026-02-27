@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c0ap4oorvtq3l" path="res://art/UI/StartNormal.png" id="1_w2mlq"]
 [ext_resource type="Texture2D" uid="uid://bj2bhp25c8ej7" path="res://art/UI/StartPressed.png" id="2_4u0aa"]
 [ext_resource type="Texture2D" uid="uid://3x3yg1js8r7c" path="res://art/RPG_Hero/idle.png" id="3_w2mlq"]
+[ext_resource type="Texture2D" uid="uid://dwm01eagjdo42" path="res://art/UI/StartHover.png" id="4_8cpu2"]
 
 [node name="MainMenu" type="CanvasLayer" unique_id=1495591544]
 script = ExtResource("1_4u0aa")
@@ -25,6 +26,7 @@ scale = Vector2(4, 4)
 pivot_offset = Vector2(32, 16)
 texture_normal = ExtResource("1_w2mlq")
 texture_pressed = ExtResource("2_4u0aa")
+texture_hover = ExtResource("4_8cpu2")
 
 [node name="HairColor" type="ColorPickerButton" parent="." unique_id=577401401]
 unique_name_in_owner = true

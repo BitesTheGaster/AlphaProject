@@ -2,7 +2,7 @@ class_name OrcEnemy
 extends Enemy
 ##
 
-signal died(global_pos: Vector2, item: Item)
+signal died(global_pos: Vector2, loot_table_name: LootManager.Names)
 
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var axe_attacks: Area2D = %AxeAttacks
@@ -69,7 +69,7 @@ func _on_hit_range_body_entered(body: Node2D) -> void:
 
 
 func _on_dead_time_timeout() -> void:
-	died.emit(global_position, Global.weapons[Global.IRON_AXE])
+	died.emit(global_position, LootManager.ORC)
 	self.queue_free()
 
 

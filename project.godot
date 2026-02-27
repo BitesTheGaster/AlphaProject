@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*uid://c3d82a8vn5nxl"
+LootManager="*uid://b5blf10h78k5x"
 
 [display]
 
@@ -35,6 +36,7 @@ folder_colors={
 "res://bible/": "yellow",
 "res://enemies/": "orange",
 "res://items/": "blue",
+"res://loot_tables/": "orange",
 "res://main/": "green",
 "res://player/": "red",
 "res://resources/": "purple",
@@ -98,4 +100,5 @@ Drop={
 
 textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
+viewport/hdr_2d=true
 environment/defaults/default_clear_color=Color(0.14509805, 0.07450981, 0.101960786, 1)

@@ -43,5 +43,6 @@ var weapons: Dictionary[Names, Weapon] = {
 var inventory: Inventory
 var current_slot = 0
 
+
 func _ready() -> void:
 	inventory = Inventory.new()

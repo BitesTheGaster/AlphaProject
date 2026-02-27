@@ -6,8 +6,11 @@ extends Node2D
 @onready var dropped_item_scene = preload("res://items/dropped_item.tscn")
 @onready var hud: Hud = %Hud
 @onready var main_menu: MainMenu = %MainMenu
+@onready var spark_anim_timer: Timer = %SparkAnimTimer
+@onready var spark: GPUParticles2D = %Spark
 
 var player: Player
+var loot: Array[Item]
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
@@ -32,7 +35,7 @@ func _spawn_item(pos: Vector2, item: Item):
 	dropped_item.name = item.item_name
 	dropped_item.item = item
 	dropped_item.player_entered.connect(_pickup_item)
-	add_child(dropped_item)
+	call_deferred("add_child", dropped_item)
 
 
 func _pickup_item(dropped_item: DroppedItem, item: Item):
@@ -53,6 +56,7 @@ func _start_game():
 	room.position = Vector2.ZERO
 	add_child(room)
 	room.spawn_orc.connect(_spawn_orc)
+	room.decor.chest_opened.connect(_chest_opened)
 	room.generate(Vector2i(3, 3))
 	
 	player = player_scene.instantiate()
@@ -70,4 +74,33 @@ func _start_game():
 
 func _spawn_orc(orc: OrcEnemy):
 	add_child(orc)
-	orc.died.connect(_spawn_item)
+	orc.died.connect(_on_orc_died)
+
+
+func _on_orc_died(global_pos: Vector2, loot_table_name: LootManager.Names):
+	var orc_loot: Array[Item] = \
+			LootManager.loot_tables[loot_table_name] \
+			.get_loot(player.stats.luck)
+	var count: int = 1
+	for item in orc_loot:
+		var pos: Vector2 = global_pos
+		pos += 8*Vector2.from_angle(deg_to_rad(360.0/len(orc_loot)*count+90))
+		_spawn_item(pos, item)
+		count += 1
+
+
+func _chest_opened(chest_coords: Vector2, tier: int):
+	loot = LootManager.get_chest_loot(tier, player.stats.luck)
+	spark_anim_timer.start()
+	spark.position = chest_coords + Vector2(12, 12)
+	spark.amount = len(loot)
+	spark.emitting = true
+
+
+func _on_spark_anim_timer_timeout() -> void:
+	var count: int = 1
+	for item in loot:
+		var pos: Vector2 = spark.position
+		pos += 16*Vector2.from_angle(deg_to_rad(360.0/len(loot)*count+90))
+		_spawn_item(pos, item)
+		count += 1

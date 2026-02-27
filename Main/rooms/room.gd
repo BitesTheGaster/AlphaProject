@@ -34,7 +34,11 @@ func _gen_chunk(chuck_pos: Vector2i, left: bool, right: bool, up: bool, down: bo
 	)
 	_rect(center, main_room_size)
 	if center:
-		_spawn_orc(center*24, main_room_size*24-Vector2i(24*2, 24*2), 0.2)
+		var rando: float = randf()
+		if rando < 0.7:
+			_spawn_orc(center*24, main_room_size*24-Vector2i(24*2, 24*2), 0.15)
+		else:
+			_set_chest(center)
 	
 	if left:
 		_rect(
@@ -113,4 +117,6 @@ func _spawn_orc(pos: Vector2, size: Vector2, frec: float):
 			orc.global_position = orc_pos
 			spawn_orc.emit(orc)
 			
-	
+
+func _set_chest(coords: Vector2i):
+	decor.set_cell(coords, 1, Vector2i(1, 0))

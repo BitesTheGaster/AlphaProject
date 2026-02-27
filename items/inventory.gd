@@ -2,8 +2,8 @@ class_name Inventory
 extends Resource
 
 var items: Dictionary[int, Item] = {
-	1: Global.weapons[Global.GOLDEN_SHORT_SWORD],
-	2: Global.weapons[Global.IRON_SWORD],
+	1: Global.items[Global.EMPTY],
+	2: Global.items[Global.EMPTY],
 	3: Global.items[Global.EMPTY],
 	4: Global.items[Global.EMPTY],
 	5: Global.items[Global.EMPTY],
