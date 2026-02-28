@@ -57,7 +57,7 @@ func _start_game():
 	add_child(room)
 	room.spawn_orc.connect(_spawn_orc)
 	room.decor.chest_opened.connect(_chest_opened)
-	room.generate(Vector2i(3, 3))
+	room.generate(Vector2i(7, 7))
 	
 	player = player_scene.instantiate()
 	player.open_inventory.connect(_on_player_open_inventory)

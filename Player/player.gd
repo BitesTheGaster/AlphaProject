@@ -11,7 +11,7 @@ var stats: PlayerStats = preload("res://resources/player_stats.tres")\
 var last_dir := Vector2.DOWN
 var input_dir: Vector2
 var inventory_opened: bool = false
-
+var camera_target_zoom := Vector2.ONE * 4
 var hair_modulate: Color
 var pants_modulate: Color
 var shirt_modulate: Color
@@ -32,6 +32,7 @@ var shirt_modulate: Color
 @onready var attack_start: Timer = %AttackStart
 @onready var attack_end: Timer = %AttackEnd
 @onready var attack_particles: CPUParticles2D = %AttackParticles
+@onready var camera: Camera2D = %Camera2D
 
 
 func _ready() -> void:	
@@ -47,12 +48,23 @@ func _process(delta: float) -> void:
 			state_machine.current_state.name != "attack":
 		inventory_opened = true
 		open_inventory.emit()
-
 	elif (Input.is_action_just_pressed("ui_cancel") or \
 			Input.is_action_just_pressed("Inventory")) and \
 			inventory_opened:
 		inventory_opened = false
 		close_inventory.emit()
+	
+	if Input.is_action_just_pressed("CameraCloser"):
+		camera_target_zoom *= 1.1
+	elif Input.is_action_just_pressed("CameraFurther"):
+		camera_target_zoom *= 0.9
+	elif Input.is_action_just_pressed("CameraReset"):
+		camera_target_zoom = Vector2.ONE * 4
+	
+	if camera.zoom != camera_target_zoom:
+		camera.zoom = camera.zoom.lerp(camera_target_zoom, 0.15)
+		if abs(camera_target_zoom.x - camera.zoom.x) < 0.001:
+			camera.zoom = camera_target_zoom
 	
 	if state_machine.current_state.name != "attack" and \
 			attack.animation != "Nothing":

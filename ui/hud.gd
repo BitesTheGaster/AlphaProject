@@ -37,7 +37,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Drop") and Global.current_slot <= 44 \
 			and Global.current_slot >= 1:
-		Global.inventory.items[Global.current_slot] = Item.new()
+		Global.inventory.items[Global.current_slot] = Global.items[Global.EMPTY]
 		
 		update_textures()
 

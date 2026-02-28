@@ -9,7 +9,8 @@
 [sub_resource type="Resource" id="Resource_f7c7t"]
 script = ExtResource("5_mc1lw")
 applied_debuffs = Array[ExtResource("3_supcp")]([ExtResource("4_yhfxh")])
-slash_color = Color(0.85481286, 0.44560415, 0, 1)
+hitbox = Vector2(22, 32)
+slash_color = Color(2.8335836, 0.5873668, 0, 1)
 metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
 
 [resource]

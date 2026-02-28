@@ -6,6 +6,8 @@ signal spawn_orc(orc: OrcEnemy)
 
 const CHUNK_SIZE := Vector2i(16, 16)
 
+var room_grid: Dictionary[Vector2i, Dictionary] = {}
+
 @onready var orc_scene = preload("res://enemies/orc/orc_enemy.tscn")
 @onready var walls: TileMapLayer = %Walls
 @onready var floor: TileMapLayer = %Floor
@@ -13,18 +15,130 @@ const CHUNK_SIZE := Vector2i(16, 16)
 
 
 func generate(floor_size: Vector2i):
-	for x in range(-roundi(floor_size.x/2.0)+1, \
-			roundi(floor_size.x/2.0)):
-		for y in range(-roundi(floor_size.y/2.0)+1, \
-				roundi(floor_size.y/2.0)):
-			var left: bool = -roundi(floor_size.x/2.0)+1 != x
-			var right: bool = roundi(floor_size.x/2.0)-1 != x
-			var up: bool = -roundi(floor_size.y/2.0)+1 != y
-			var down: bool = roundi(floor_size.y/2.0)-1 != y
-			_gen_chunk(Vector2i(x, y), left, right, up, down)
+	var room_grid: Dictionary[Vector2i, Dictionary] = {}
+	
+	for x in range(-roundi(floor_size.x/2.0)+1, roundi(floor_size.x/2.0)):
+		for y in range(-roundi(floor_size.y/2.0)+1, roundi(floor_size.y/2.0)):
+			room_grid[Vector2i(x, y)] = {
+				"pos": Vector2i(x, y),
+				"left": false,
+				"right": false,
+				"up": false,
+				"down": false,
+				"visited": false,
+				"has_ladder": false,
+			}
+	
+	_generate_maze(room_grid, Vector2i.ZERO)
+	_add_extra_passages(room_grid, 0.15)
+	
+	var farthest_pos = _find_farthest_room(room_grid, Vector2i.ZERO)
+	room_grid[farthest_pos].has_ladder = true
+	
+	for room in room_grid.values():
+		_gen_chunk(room.pos, room.left, room.right, room.up, room.down, room.has_ladder)
 
 
-func _gen_chunk(chuck_pos: Vector2i, left: bool, right: bool, up: bool, down: bool):
+func _find_farthest_room(room_grid: Dictionary[Vector2i, Dictionary], \
+		start_pos: Vector2i) -> Vector2i:
+	var distances = {}
+	var queue = [start_pos]
+	distances[start_pos] = 0
+	
+	while queue.size() > 0:
+		var current = queue.pop_front()
+		var current_dist = distances[current]
+		
+		var dirs = [
+			Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)
+		]
+		
+		for dir in dirs:
+			var neighbor = current + dir
+			if room_grid.has(neighbor) and not distances.has(neighbor):
+				# Проверяем, есть ли проход между комнатами
+				if (dir == Vector2i(1, 0) and room_grid[current].right) or \
+				   (dir == Vector2i(-1, 0) and room_grid[current].left) or \
+				   (dir == Vector2i(0, 1) and room_grid[current].down) or \
+				   (dir == Vector2i(0, -1) and room_grid[current].up):
+					distances[neighbor] = current_dist + 1
+					queue.append(neighbor)
+		
+	var max_dist = -1
+	var farthest = start_pos
+	for pos in distances:
+		if distances[pos] > max_dist:
+			max_dist = distances[pos]
+			farthest = pos
+	
+	return farthest
+
+
+func _generate_maze(room_grid: Dictionary[Vector2i, Dictionary], \
+		current_pos: Vector2i):
+	var current = room_grid[current_pos]
+	current.visited = true
+	
+	var dirs = [
+		{
+			"dir": "right",
+			"pos": Vector2i(1, 0),
+			"opposite": "left",
+		},
+		{
+			"dir": "left",
+			"pos": Vector2i(-1, 0),
+			"opposite": "right",
+		},
+		{
+			"dir": "down",
+			"pos": Vector2i(0, 1),
+			"opposite": "up",
+		},
+		{
+			"dir": "up",
+			"pos": Vector2i(0, -1),
+			"opposite": "down",
+		},
+	]
+	dirs.shuffle()
+	
+	for dir_info in dirs:
+		var neighbor_pos = current_pos + dir_info.pos
+		
+		if not room_grid.has(neighbor_pos):
+			continue
+			
+		var neighbor = room_grid[neighbor_pos]
+		
+		if not neighbor.visited:
+			current[dir_info.dir] = true
+			neighbor[dir_info.opposite] = true
+			_generate_maze(room_grid, neighbor_pos)
+
+
+func _add_extra_passages(room_grid: Dictionary[Vector2i, Dictionary], chance: float):
+	for pos in room_grid.keys():
+		var current = room_grid[pos]
+		
+		var neighbors = [
+			{"dir": "right", "pos": Vector2i(1, 0), "opposite": "left"},
+			{"dir": "down", "pos": Vector2i(0, 1), "opposite": "up"}
+		]
+		
+		for nb in neighbors:
+			var neighbor_pos = pos + nb.pos
+			if not room_grid.has(neighbor_pos):
+				continue
+				
+			var neighbor = room_grid[neighbor_pos]
+			
+			if not current[nb.dir] and randf() < chance:
+				current[nb.dir] = true
+				neighbor[nb.opposite] = true
+
+
+func _gen_chunk(chuck_pos: Vector2i, left: bool, right: bool, up: bool, down: bool, has_ladder: bool):
 	var center: Vector2i = chuck_pos * CHUNK_SIZE
 	
 	# main room
@@ -35,7 +149,7 @@ func _gen_chunk(chuck_pos: Vector2i, left: bool, right: bool, up: bool, down: bo
 	_rect(center, main_room_size)
 	if center:
 		var rando: float = randf()
-		if rando < 0.7:
+		if rando < 0.9:
 			_spawn_orc(center*24, main_room_size*24-Vector2i(24*2, 24*2), 0.15)
 		else:
 			_set_chest(center)
@@ -83,6 +197,23 @@ func _gen_chunk(chuck_pos: Vector2i, left: bool, right: bool, up: bool, down: bo
 				3,
 				16 - main_room_size.y/2
 			)
+		)
+	if has_ladder:
+		decor.set_cell(
+			Vector2(
+				center.x,
+				center.y - main_room_size.y/2
+			),
+			1,
+			Vector2i(2, 2)
+		)
+		walls.set_cell(
+			Vector2(
+				center.x,
+				center.y - main_room_size.y/2
+			),
+			0,
+			Vector2i(2, 2)
 		)
 
 func _rect(pos: Vector2i, size: Vector2i):
