@@ -512,11 +512,10 @@ _data = {
 radius = 128.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_klwc4"]
-size = Vector2(24, 24)
+size = Vector2(24, 30)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2lury"]
-radius = 9.0
-height = 36.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8jb5p"]
+size = Vector2(19, 38)
 
 [node name="OrcEnemy" type="CharacterBody2D" unique_id=1422445384 node_paths=PackedStringArray("nav_agent") groups=["enemy"]]
 process_mode = 4
@@ -546,6 +545,7 @@ libraries/ = SubResource("AnimationLibrary_xmmhe")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=654739543]
 path_postprocessing = 2
 simplify_path = true
+path_search_max_polygons = 64
 avoidance_enabled = true
 avoidance_layers = 0
 avoidance_mask = 0
@@ -631,8 +631,9 @@ unique_name_in_owner = true
 
 [node name="HitRangeCollision" type="CollisionShape2D" parent="HitRange" unique_id=1619437971]
 unique_name_in_owner = true
+position = Vector2(0, -5.443983e-07)
 rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_2lury")
+shape = SubResource("RectangleShape2D_8jb5p")
 debug_color = Color(0.71232146, 0.5380312, 5.7756904e-07, 0)
 
 [node name="HealthBar" type="TextureProgressBar" parent="." unique_id=1647849117]

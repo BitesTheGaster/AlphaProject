@@ -1,9 +1,17 @@
 [gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://lslu2gdob3bn"]
 
 [ext_resource type="Script" uid="uid://bioql8u0ytv8k" path="res://enemies/enemy_stats.gd" id="1_s15jw"]
-[ext_resource type="Resource" uid="uid://cif670rh3ir0p" path="res://resources/weapon_stats/iron_axe_stats.tres" id="2_mrhcb"]
+[ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="2_ihlwf"]
+[ext_resource type="Script" uid="uid://cc88k7m5lh5ge" path="res://items/weapons/weapon_stats.gd" id="3_tkmpu"]
+
+[sub_resource type="Resource" id="Resource_eu04x"]
+script = ExtResource("3_tkmpu")
+damage = 20
+speed = 1.5
+hitbox = Vector2(24, 30)
+metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
 
 [resource]
 script = ExtResource("1_s15jw")
-weapon_stats = ExtResource("2_mrhcb")
+weapon_stats = SubResource("Resource_eu04x")
 metadata/_custom_type_script = "uid://bioql8u0ytv8k"
