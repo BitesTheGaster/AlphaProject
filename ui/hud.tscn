@@ -13,6 +13,9 @@ font = ExtResource("5_en2x2")
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_q43x7"]
+font = ExtResource("5_en2x2")
+
 [node name="Hud" type="CanvasLayer" unique_id=594341442]
 script = ExtResource("1_546lt")
 
@@ -191,3 +194,13 @@ value = 100.0
 texture_under = ExtResource("6_q43x7")
 texture_progress = ExtResource("7_srpbi")
 texture_progress_offset = Vector2(9, 0)
+
+[node name="FpsCounter" type="Label" parent="." unique_id=1759898426]
+unique_name_in_owner = true
+offset_top = 64.0
+offset_right = 40.0
+offset_bottom = 87.0
+text = "FPS: 
+Min:
+Max:"
+label_settings = SubResource("LabelSettings_q43x7")

@@ -7,6 +7,7 @@
 
 [sub_resource type="Environment" id="Environment_c651c"]
 background_mode = 3
+tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kfbq2"]
@@ -53,6 +54,7 @@ anim_speed_max = 1.0
 [node name="Main" type="Node2D" unique_id=567999151]
 y_sort_enabled = true
 script = ExtResource("1_3wy1v")
+floor_size = Vector2(15, 15)
 
 [node name="Hud" parent="." unique_id=594341442 instance=ExtResource("4_c651c")]
 unique_name_in_owner = true
@@ -79,4 +81,8 @@ process_material = SubResource("ParticleProcessMaterial_bsumw")
 unique_name_in_owner = true
 one_shot = true
 
+[node name="EnemyUpdate" type="Timer" parent="." unique_id=308835382]
+unique_name_in_owner = true
+
 [connection signal="timeout" from="SparkAnimTimer" to="." method="_on_spark_anim_timer_timeout"]
+[connection signal="timeout" from="EnemyUpdate" to="." method="_on_enemy_update_timeout"]

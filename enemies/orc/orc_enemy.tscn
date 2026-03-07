@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://css20htut6q4c" path="res://enemies/enemy_state_machine.gd" id="8_xmmhe"]
 [ext_resource type="Script" uid="uid://drrtdkku0ku4p" path="res://enemies/orc/states/attack_orc_state.gd" id="9_2lury"]
 [ext_resource type="Script" uid="uid://hxl8864rqr6b" path="res://enemies/orc/states/idle_orc_state.gd" id="9_t35ew"]
-[ext_resource type="Script" uid="uid://dkpjgl2u213js" path="res://enemies/orc/states/move_enemy_state.gd" id="11_klwc4"]
+[ext_resource type="Script" uid="uid://dkpjgl2u213js" path="res://enemies/orc/states/move_orc_enemy_state.gd" id="11_klwc4"]
 [ext_resource type="Script" uid="uid://d2vy7oind5vrm" path="res://enemies/orc/states/hurt_orc_state.gd" id="12_klwc4"]
 [ext_resource type="Script" uid="uid://bxbdycthw6cwl" path="res://enemies/orc/states/death_orc_state.gd" id="13_8jb5p"]
 [ext_resource type="Texture2D" uid="uid://ceu0tnxlitb6" path="res://art/UI/HealthBarUnder.png" id="13_bav7l"]
@@ -519,9 +519,11 @@ radius = 9.0
 height = 36.0
 
 [node name="OrcEnemy" type="CharacterBody2D" unique_id=1422445384 node_paths=PackedStringArray("nav_agent") groups=["enemy"]]
+process_mode = 4
+physics_interpolation_mode = 2
 y_sort_enabled = true
 collision_layer = 2
-collision_mask = 2
+collision_mask = 4
 script = ExtResource("1_h010b")
 nav_agent = NodePath("NavigationAgent2D")
 metadata/_custom_type_script = "uid://dthx6auhod513"
@@ -542,8 +544,11 @@ deterministic = true
 libraries/ = SubResource("AnimationLibrary_xmmhe")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=654739543]
-path_postprocessing = 1
+path_postprocessing = 2
+simplify_path = true
 avoidance_enabled = true
+avoidance_layers = 0
+avoidance_mask = 0
 
 [node name="EnemyStateMachine" type="Node" parent="." unique_id=1780941723 node_paths=PackedStringArray("enemy", "initial_state")]
 unique_name_in_owner = true

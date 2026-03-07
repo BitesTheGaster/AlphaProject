@@ -1,6 +1,17 @@
 extends Node2D
 ## Main logic script
 
+@export var floor_size := Vector2(7, 7)
+
+var player: Player
+var boss: Enemy
+var loot: Array[Item]
+var _room: Room
+var enemies: Array[Enemy] = []
+var started: bool = false
+var min_fps: float
+var max_fps: float
+
 @onready var room_scene = preload("res://main/rooms/room.tscn")
 @onready var player_scene = preload("res://player/player.tscn")
 @onready var dropped_item_scene = preload("res://items/dropped_item.tscn")
@@ -8,14 +19,21 @@ extends Node2D
 @onready var main_menu: MainMenu = %MainMenu
 @onready var spark_anim_timer: Timer = %SparkAnimTimer
 @onready var spark: GPUParticles2D = %Spark
-
-var player: Player
-var loot: Array[Item]
+@onready var enemy_update: Timer = %EnemyUpdate
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
 	hud.hide()
 	main_menu.start.pressed.connect(_start_game)
+
+
+func _process(delta: float) -> void:
+	if started:
+		var current_fps = Engine.get_frames_per_second()
+		min_fps = min(min_fps, current_fps)
+		max_fps = max(max_fps, current_fps)
+		hud.update_fps(current_fps, min_fps, max_fps)
+
 
 func _on_player_open_inventory():
 	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
@@ -27,6 +45,7 @@ func _on_player_close_inventory():
 	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_HIDDEN
 	hud.inventory.hide()
 	hud.tooltip.hide()
+
 
 func _spawn_item(pos: Vector2, item: Item):
 	var dropped_item: DroppedItem = dropped_item_scene.instantiate()
@@ -57,7 +76,11 @@ func _start_game():
 	add_child(room)
 	room.spawn_orc.connect(_spawn_orc)
 	room.decor.chest_opened.connect(_chest_opened)
-	room.generate(Vector2i(7, 7))
+	room.boss_agro.connect(_on_boss_agro_range_body_entered)
+	room.generate(floor_size)
+	boss = room.boss
+	boss.died.connect(_on_boss_death)
+	_room = room
 	
 	player = player_scene.instantiate()
 	player.open_inventory.connect(_on_player_open_inventory)
@@ -70,7 +93,13 @@ func _start_game():
 	add_child(player)
 	
 	hud.player = player
-
+	started = true
+	
+	enemy_update.start()
+	
+	for child in get_children():
+		if child is Enemy:
+			enemies.append(child)
 
 func _spawn_orc(orc: OrcEnemy):
 	add_child(orc)
@@ -93,8 +122,9 @@ func _chest_opened(chest_coords: Vector2, tier: int):
 	loot = LootManager.get_chest_loot(tier, player.stats.luck)
 	spark_anim_timer.start()
 	spark.position = chest_coords + Vector2(12, 12)
-	spark.amount = len(loot)
-	spark.emitting = true
+	if len(loot):
+		spark.amount = len(loot)
+		spark.emitting = true
 
 
 func _on_spark_anim_timer_timeout() -> void:
@@ -104,3 +134,43 @@ func _on_spark_anim_timer_timeout() -> void:
 		pos += 16*Vector2.from_angle(deg_to_rad(360.0/len(loot)*count+90))
 		_spawn_item(pos, item)
 		count += 1
+
+
+func _on_boss_agro_range_body_entered(body: Node2D) -> void:
+	if body is Player and boss:
+		boss.set_target(body)
+		for child in get_children():
+			if child is Enemy and not child == boss:
+				child.queue_free()
+
+
+func _on_boss_death(global_pos: Vector2, loot_table_name: LootManager.Names):
+	var orc_loot: Array[Item] = \
+			LootManager.loot_tables[loot_table_name] \
+			.get_loot(player.stats.luck)
+	var count: int = 1
+	for item in orc_loot:
+		var pos: Vector2 = global_pos
+		pos += 8*Vector2.from_angle(deg_to_rad(360.0/len(orc_loot)*count+90))
+		_spawn_item(pos, item)
+		count += 1
+	_room.spawn_gate(_room.boss_room)
+
+
+func _on_enemy_update_timeout() -> void:
+	for child in enemies:
+		if not child:
+			continue
+		if abs(child.position - player.position).x > 256*1.75 or \
+				abs(child.position - player.position).y > 128*1.75:
+			child.process_mode = Node.PROCESS_MODE_DISABLED
+			child.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+			child.disabled = true
+			child.nav_agent.avoidance_enabled = false
+			child.hide()
+		else:
+			child.process_mode = Node.PROCESS_MODE_INHERIT
+			child.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_INHERIT
+			child.disabled = false
+			child.nav_agent.avoidance_enabled = true
+			child.show()

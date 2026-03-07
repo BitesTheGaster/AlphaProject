@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EnemyStats" format=3 uid="uid://bj08e0ae6756n"]
+
+[ext_resource type="Script" uid="uid://bioql8u0ytv8k" path="res://enemies/enemy_stats.gd" id="1_5vsyt"]
+[ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="2_uxqdr"]
+[ext_resource type="Script" uid="uid://cc88k7m5lh5ge" path="res://items/weapons/weapon_stats.gd" id="3_1cds0"]
+
+[sub_resource type="Resource" id="Resource_8qsu7"]
+script = ExtResource("3_1cds0")
+damage = 50
+hitbox = Vector2(48, 64)
+metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
+
+[resource]
+script = ExtResource("1_5vsyt")
+speed = 60.0
+max_health = 500
+weapon_stats = SubResource("Resource_8qsu7")
+metadata/_custom_type_script = "uid://bioql8u0ytv8k"

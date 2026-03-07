@@ -56,8 +56,10 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("CameraCloser"):
 		camera_target_zoom *= 1.1
+		camera_target_zoom = camera_target_zoom.clamp(Vector2(0.125, 0.125), Vector2(24, 24))
 	elif Input.is_action_just_pressed("CameraFurther"):
 		camera_target_zoom *= 0.9
+		camera_target_zoom = camera_target_zoom.clamp(Vector2(0.125, 0.125), Vector2(24, 24))
 	elif Input.is_action_just_pressed("CameraReset"):
 		camera_target_zoom = Vector2.ONE * 4
 	
@@ -121,7 +123,17 @@ func _on_death_time_timeout() -> void:
 
 
 func update_debuffs(delta: float):
+	var color = Vector3(1, 1, 1)
+	var cnt: int = 1
 	for debuff in stats.current_debuffs:
 		debuff.apply_debuff(self, delta)
 		if not debuff.is_active():
 			stats.current_debuffs.erase(debuff)
+		color += Vector3(debuff.color.r, debuff.color.g, debuff.color.b)
+		cnt += 1
+	
+	self.modulate = Color(
+			(color/cnt).x,
+			(color/cnt).y,
+			(color/cnt).z
+	)

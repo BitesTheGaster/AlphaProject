@@ -3,6 +3,8 @@ extends CanvasLayer
 ##
 
 var _item_sprites: Dictionary[int, Sprite2D]
+var min_fps: float = 999
+var max_fps: float = -1
 
 @onready var weapon_sprite: Sprite2D = %WeaponSprite
 @onready var tooltip: Label = %Tooltip
@@ -10,6 +12,7 @@ var _item_sprites: Dictionary[int, Sprite2D]
 @onready var player: Player
 @onready var inventory: Sprite2D = %Inventory
 @onready var health_bar: TextureProgressBar = %HealthBar
+@onready var fps_counter: Label = %FpsCounter
 
 
 func _ready() -> void:
@@ -26,12 +29,15 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("Equip") and Global.current_slot != 0:
 		if Global.current_slot <= 44 and \
-				Global.inventory.weapon != Weapon.new():
+				Global.inventory.weapon != Global.weapons[Global.EMPTY]:
 			if Global.inventory.items[Global.current_slot] is Weapon:
 				var temp_weapon: Weapon = Global.inventory.items[Global.current_slot]
 				Global.inventory.items[Global.current_slot] = Global.inventory.weapon
 				Global.inventory.weapon = temp_weapon
 				Global.inventory.weapon.equip(player)
+			if Global.inventory.items[Global.current_slot] is Potion:
+				Global.inventory.items[Global.current_slot].use(player)
+				Global.inventory.items[Global.current_slot] = Global.items[Global.EMPTY]
 		
 		update_textures()
 	
@@ -94,3 +100,8 @@ func update_textures():
 
 func on_player_health_changed(health: int):
 	health_bar.value = health
+
+
+func update_fps(current_fps: float, min_fps: float, max_fps: float):
+	fps_counter.text = "current fps: " + str(current_fps) \
+			+ "\nmin: " + str(min_fps) + "\nmax: " + str(max_fps)

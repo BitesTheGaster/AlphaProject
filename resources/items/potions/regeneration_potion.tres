@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Potion" format=3 uid="uid://0e0q8hqyiny0"]
+
+[ext_resource type="Resource" uid="uid://cnoval8nm86tq" path="res://resources/debuffs/regeneration_debuff.tres" id="1_7jxfb"]
+[ext_resource type="Script" uid="uid://diupsj5mdmsnb" path="res://items/potions/potion.gd" id="1_fq1ay"]
+[ext_resource type="Texture2D" uid="uid://bkvhxpncvgxcy" path="res://art/Free - Raven Fantasy Icons/Separated Files/64x64/fc265.png" id="3_0jg62"]
+
+[resource]
+script = ExtResource("1_fq1ay")
+effect = ExtResource("1_7jxfb")
+item_name = "Regeneration potion"
+texture = ExtResource("3_0jg62")
+metadata/_custom_type_script = "uid://diupsj5mdmsnb"

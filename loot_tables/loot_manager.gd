@@ -2,13 +2,16 @@ extends Node
 ##
 
 enum Names {
-	ORC
+	ORC,
+	KNIGHT_BOSS,
 }
 
 const ORC = Names.ORC
+const KNIGHT_BOSS = Names.KNIGHT_BOSS
 
 var loot_tables: Dictionary[Names, LootTable] = {
 	ORC: preload("res://resources/loot_tables/orc.tres"),
+	KNIGHT_BOSS: preload("res://resources/loot_tables/knight_boss.tres"),
 }
 
 var chest_loot_tables: Dictionary[int, LootTable] = {

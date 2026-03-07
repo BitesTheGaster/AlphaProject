@@ -41,7 +41,7 @@ offset_right = -20.0
 offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 1)
+color = Color(0.79409003, 0.4118847, 0.28088826, 1)
 
 [node name="ShirtColor" type="ColorPickerButton" parent="." unique_id=1906987919]
 unique_name_in_owner = true
@@ -56,7 +56,7 @@ offset_right = -20.0
 offset_bottom = 124.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 1)
+color = Color(0.83716756, 0.6506493, 0.33309957, 1)
 
 [node name="PantsColor" type="ColorPickerButton" parent="." unique_id=2053881585]
 unique_name_in_owner = true
@@ -71,7 +71,7 @@ offset_right = -20.0
 offset_bottom = 156.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 1, 1, 1)
+color = Color(0.761243, 0.4574318, 0.56831455, 1)
 
 [node name="Hair" type="Sprite2D" parent="." unique_id=1267476829]
 unique_name_in_owner = true

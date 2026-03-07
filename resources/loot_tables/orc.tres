@@ -4,7 +4,7 @@
 [ext_resource type="Resource" uid="uid://x05v8hgfcr5q" path="res://resources/items/weapons/iron_axe.tres" id="2_nqtpo"]
 [ext_resource type="Script" uid="uid://djmoo36gotsef" path="res://loot_tables/loot_table.gd" id="2_svab6"]
 
-[sub_resource type="Resource" id="Resource_o21ct"]
+[sub_resource type="Resource" id="Resource_svab6"]
 script = ExtResource("1_5utwp")
 item = ExtResource("2_nqtpo")
 chance = 0.3
@@ -12,6 +12,6 @@ metadata/_custom_type_script = "uid://svfjbaof8qg4"
 
 [resource]
 script = ExtResource("2_svab6")
-drops = Array[ExtResource("1_5utwp")]([SubResource("Resource_o21ct")])
+drops = Array[ExtResource("1_5utwp")]([SubResource("Resource_svab6")])
 luck_scaling = 0.5
 metadata/_custom_type_script = "uid://djmoo36gotsef"

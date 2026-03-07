@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DPSDebuff" format=3 uid="uid://cnoval8nm86tq"]
+
+[ext_resource type="Script" uid="uid://clfh6ydif35ae" path="res://items/debuffs/dps_debuff.gd" id="1_7snl2"]
+
+[resource]
+script = ExtResource("1_7snl2")
+damage = -1
+duration = 10.0
+delay = 0.25
+color = Color(0.99999756, 0.4592005, 0.5373402, 1)
+metadata/_custom_type_script = "uid://clfh6ydif35ae"

@@ -6,9 +6,15 @@ extends CanvasLayer
 @onready var shirt: Sprite2D = %Shirt
 @onready var player: Sprite2D = %Player
 @onready var hair_color: ColorPickerButton = %HairColor
-@onready var pants_color: ColorPickerButton = %ShirtColor
-@onready var shirt_color: ColorPickerButton = %PantsColor
+@onready var shirt_color: ColorPickerButton = %ShirtColor
+@onready var pants_color: ColorPickerButton = %PantsColor
 @onready var start: TextureButton = %Start
+
+
+func _ready() -> void:
+	hair.modulate = hair_color.color
+	shirt.modulate = shirt_color.color
+	pants.modulate = pants_color.color
 
 
 func _on_hair_color_color_changed(color: Color) -> void:

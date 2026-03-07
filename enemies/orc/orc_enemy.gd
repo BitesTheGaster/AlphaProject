@@ -4,6 +4,10 @@ extends Enemy
 
 signal died(global_pos: Vector2, loot_table_name: LootManager.Names)
 
+@export var navigation_update_interval: float = 0.5
+
+var navigation_timer: float = randf_range(0, navigation_update_interval)
+
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var axe_attacks: Area2D = %AxeAttacks
 @onready var state_machine: EnemyStateMachine = %EnemyStateMachine
@@ -49,7 +53,12 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	update_nav_velocity()
+	if disabled:
+		return
+	navigation_timer += delta
+	if navigation_timer >= navigation_update_interval:
+		navigation_timer = 0.0
+		update_nav_velocity()
 
 
 func _on_agro_range_body_entered(body: Node2D) -> void:

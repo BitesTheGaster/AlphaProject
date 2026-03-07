@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DPSDebuff" format=3 uid="uid://bac4vwvf5y5y1"]
+
+[ext_resource type="Script" uid="uid://clfh6ydif35ae" path="res://items/debuffs/dps_debuff.gd" id="1_n4j4n"]
+
+[resource]
+script = ExtResource("1_n4j4n")
+damage = 2
+duration = 5.0
+delay = 0.125
+metadata/_custom_type_script = "uid://clfh6ydif35ae"

@@ -7,4 +7,5 @@ script = ExtResource("1_sa42n")
 damage = 1
 duration = 4.0
 delay = 0.25
+color = Color(4.483586, 0.6111734, 0, 1)
 metadata/_custom_type_script = "uid://clfh6ydif35ae"

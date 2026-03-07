@@ -165,7 +165,7 @@ states/Run/node = SubResource("AnimationNodeBlendSpace2D_x3vf3")
 states/Run/position = Vector2(510.576, 174.40001)
 states/Start/position = Vector2(170.40001, 80.73139)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_apopc"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_btcbx"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_qjkh3"), "Attack", "Run", SubResource("AnimationNodeStateMachineTransition_rptt4"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_r7pn3"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_7pqkx"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_uw77l"), "Idle", "Death", SubResource("AnimationNodeStateMachineTransition_s7qer"), "Attack", "Death", SubResource("AnimationNodeStateMachineTransition_g4c7l"), "Run", "Death", SubResource("AnimationNodeStateMachineTransition_knn7v")]
-graph_offset = Vector2(-70.07303, -153)
+graph_offset = Vector2(-76.07303, -17)
 
 [sub_resource type="Animation" id="Animation_btcbx"]
 length = 0.001
@@ -5293,35 +5293,35 @@ libraries/PlayerMovement = SubResource("AnimationLibrary_5htga")
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1261945476]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_bbimk")
-animation = &"IdleDown"
+animation = &"AttackDown"
 autoplay = "IdleDown"
 offset = Vector2(0, -7)
 
 [node name="Hair" type="AnimatedSprite2D" parent="Sprite" unique_id=1680185382]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_c35mf")
-animation = &"IdleDown"
+animation = &"AttackDown"
 autoplay = "IdleDown"
 offset = Vector2(0, -7)
 
 [node name="Pants" type="AnimatedSprite2D" parent="Sprite" unique_id=2121333834]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_mteo0")
-animation = &"IdleDown"
+animation = &"AttackDown"
 autoplay = "IdleDown"
 offset = Vector2(0, -7)
 
 [node name="Shirt" type="AnimatedSprite2D" parent="Sprite" unique_id=788130916]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_65viv")
-animation = &"IdleDown"
+animation = &"AttackDown"
 autoplay = "IdleDown"
 offset = Vector2(0, -7)
 
 [node name="Attack" type="AnimatedSprite2D" parent="Sprite" unique_id=235172568]
 unique_name_in_owner = true
 sprite_frames = SubResource("SpriteFrames_rgyib")
-animation = &"Nothing"
+animation = &"AttackDown"
 autoplay = "Nothing"
 offset = Vector2(0, -7)
 

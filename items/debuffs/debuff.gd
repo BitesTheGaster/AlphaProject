@@ -4,6 +4,7 @@ extends Resource
 
 @export var duration: float
 @export var delay: float
+@export var color: Color = Color.WHITE
 
 var time: float = 0.0
 
