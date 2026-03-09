@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Weapon" format=3 uid="uid://cfuikggk472qp"]
+
+[ext_resource type="Script" uid="uid://cywp8pt8dxeb7" path="res://items/weapons/weapon.gd" id="1_tqqrc"]
+[ext_resource type="Texture2D" uid="uid://cx1jmuc6yofys" path="res://art/Free - Raven Fantasy Icons/Separated Files/64x64/fc1442.png" id="2_r0ons"]
+[ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="3_w7guo"]
+[ext_resource type="Resource" uid="uid://bac4vwvf5y5y1" path="res://resources/debuffs/bleed_debuff.tres" id="4_xawvx"]
+[ext_resource type="Script" uid="uid://cc88k7m5lh5ge" path="res://items/weapons/weapon_stats.gd" id="5_u3se8"]
+
+[sub_resource type="Resource" id="Resource_orm2r"]
+script = ExtResource("5_u3se8")
+damage = 15
+speed = 1.5
+applied_debuffs = Array[ExtResource("3_w7guo")]([ExtResource("4_xawvx")])
+slash_color = Color(0.7724884, 2.9600412e-06, 5.7756904e-07, 1)
+metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
+
+[resource]
+script = ExtResource("1_tqqrc")
+weapon_stats = SubResource("Resource_orm2r")
+item_name = "Cleaver"
+texture = ExtResource("2_r0ons")
+metadata/_custom_type_script = "uid://cywp8pt8dxeb7"

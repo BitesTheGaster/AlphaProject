@@ -50,6 +50,8 @@ func _process(delta: float) -> void:
 			axe_attacks.scale = Vector2.ONE
 	
 	update_debuffs(delta)
+	if stats.health > stats.max_health:
+		stats.health = stats.max_health
 
 
 func _physics_process(delta: float) -> void:

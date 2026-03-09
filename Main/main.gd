@@ -1,7 +1,7 @@
 extends Node2D
 ## Main logic script
 
-@export var floor_size := Vector2(7, 7)
+@export var floor_size := Vector2i(7, 7)
 
 var player: Player
 var boss: Enemy
@@ -100,6 +100,7 @@ func _start_game():
 	for child in get_children():
 		if child is Enemy:
 			enemies.append(child)
+	print(len(enemies))
 
 func _spawn_orc(orc: OrcEnemy):
 	add_child(orc)
@@ -155,6 +156,7 @@ func _on_boss_death(global_pos: Vector2, loot_table_name: LootManager.Names):
 		_spawn_item(pos, item)
 		count += 1
 	_room.spawn_gate(_room.boss_room)
+	_room.gate_open.start()
 
 
 func _on_enemy_update_timeout() -> void:

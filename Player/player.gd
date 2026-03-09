@@ -73,6 +73,8 @@ func _process(delta: float) -> void:
 		attack.play("Nothing")
 	
 	update_debuffs(delta)
+	if stats.health > stats.max_health:
+		stats.health = stats.max_health
 
 
 func take_damage(damage: int):

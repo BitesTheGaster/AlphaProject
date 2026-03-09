@@ -6,4 +6,4 @@ extends Item
 
 func use(target: CharacterBody2D):
 	if (target is Player) or (target is Enemy):
-		target.stats.current_debuffs.append(effect)
+		target.stats.current_debuffs.append(effect.duplicate())
