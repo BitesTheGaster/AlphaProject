@@ -33,7 +33,7 @@ func enter() -> void:
 	
 	enemy.dead_time.start()
 	
-	enemy.collision.set_deffered("disabled", true)
+	enemy.collision.set_deferred("disabled", true)
 
 
 func exit() -> void:
