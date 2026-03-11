@@ -1,7 +1,11 @@
 extends Node2D
 ## Main logic script
 
-@export var floor_size := Vector2i(7, 7)
+@export var floor_sizes: Array[Vector2i] = [
+	Vector2i(5, 5),
+	Vector2i(7, 7),
+	Vector2i(15, 15),
+]
 
 var player: Player
 var boss: Enemy
@@ -11,6 +15,7 @@ var enemies: Array[Enemy] = []
 var started: bool = false
 var min_fps: float
 var max_fps: float
+var current_floor: int = 0
 
 @onready var room_scene = preload("res://main/rooms/room.tscn")
 @onready var player_scene = preload("res://player/player.tscn")
@@ -76,8 +81,9 @@ func _start_game():
 	add_child(room)
 	room.spawn_orc.connect(_spawn_orc)
 	room.decor.chest_opened.connect(_chest_opened)
+	room.decor.new_floor.connect(_new_floor)
 	room.boss_agro.connect(_on_boss_agro_range_body_entered)
-	room.generate(floor_size)
+	room.generate(floor_sizes[current_floor])
 	boss = room.boss
 	boss.died.connect(_on_boss_death)
 	_room = room
@@ -100,7 +106,8 @@ func _start_game():
 	for child in get_children():
 		if child is Enemy:
 			enemies.append(child)
-	print(len(enemies))
+	print("Floor: " + str(current_floor) + " Enemies: " + str(len(enemies)) + \
+			" Size: " + str(floor_sizes[current_floor]))
 
 func _spawn_orc(orc: OrcEnemy):
 	add_child(orc)
@@ -181,3 +188,25 @@ func _on_enemy_update_timeout() -> void:
 			child.disabled = false
 			child.nav_agent.avoidance_enabled = true
 			child.show()
+
+
+func _new_floor():
+	current_floor += 1
+	
+	if not current_floor < len(floor_sizes):
+		player.take_damage(1488) # Temporary
+		print("Floor " + str(current_floor) + " does not exist")
+		return
+	
+	player.position = Vector2.ZERO
+	_room.generate(floor_sizes[current_floor])
+	while enemies:
+		enemies.pop_back()
+	print(len(enemies))
+	for child in get_children():
+		if child is Enemy:
+			enemies.append(child)
+	print("Floor: " + str(current_floor) + " Enemies: " + str(len(enemies)) + \
+			" Size: " + str(floor_sizes[current_floor]))
+	boss = _room.boss
+	boss.died.connect(_on_boss_death)

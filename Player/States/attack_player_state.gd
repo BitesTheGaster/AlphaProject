@@ -82,13 +82,20 @@ func _on_sword_attacks_body_shape_entered(body_rid: RID, body: Node2D, \
 		body_shape_index: int, local_shape_index: int) -> void:
 	if body is Decor:
 		var tile_coords: Vector2i = \
-				body.get_coords_for_body_rid(body_rid) * 16
+				body.get_coords_for_body_rid(body_rid)
 		var tile_data: TileData = \
 				body.get_cell_tile_data(tile_coords)
+		if not tile_data:
+			print("why")
+			return
 		var tile_type: String = tile_data.get_custom_data("tile_type")
 		if tile_type == "chest":
 			var tier = tile_data.get_custom_data("tier")
 			body.open_chest(tile_coords, tier)
+		if tile_type == "gate":
+			var is_opened = tile_data.get_custom_data("opened")
+			if is_opened:
+				body.new_floor.emit()
 
 func _on_attack_end_timeout() -> void:
 	player.attack_hibox_down.set_deferred("disabled", true)

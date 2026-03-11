@@ -6,9 +6,9 @@ uniform float speed = 1;
 void fragment() {
 	vec3 color = vec3(0.019, 0.007, 0.01);
 	
-	vec2 uv1 = vec2(UV.x + TIME * speed, UV.y);
-	vec2 uv2 = vec2(UV.x - TIME * speed, UV.y);
-	vec2 uv3 = vec2(UV.x, UV.y + TIME * speed);
+	vec2 uv1 = vec2(UV.x/4.0 + TIME * speed, UV.y/4.0);
+	vec2 uv2 = vec2(UV.x/2.0 - TIME * speed, UV.y/2.0);
+	vec2 uv3 = vec2(UV.x/4.0*3.0, UV.y/4.0*3.0 + TIME * speed);
 	vec2 uv4 = vec2(UV.x, UV.y - TIME * speed);
 	
 	float noise1 = texture(noise_image, uv1).r;

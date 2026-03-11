@@ -12,6 +12,7 @@ enum Bosses {
 
 const CHUNK_SIZE := Vector2i(16, 16)
 const BOSS_ROOM_SIZE := Vector2i(14, 14)
+const PASSAGE_WIDTH: int = 3
 
 var room_grid: Dictionary[Vector2i, Dictionary] = {}
 var gate_pos: Vector2i = Vector2i.ZERO
@@ -23,6 +24,7 @@ var gate_frames: Array[Vector2i] = [
 	Vector2i(2, 4),
 ]
 var boss: Enemy
+var size: Vector2i
 
 
 @onready var orc_scene = preload("res://enemies/orc/orc_enemy.tscn")
@@ -39,6 +41,9 @@ var boss: Enemy
 
 
 func generate(floor_size: Vector2i):
+	if size:
+		_erase_rect(Vector2i.ZERO, size*CHUNK_SIZE+CHUNK_SIZE)
+	size = floor_size
 	boss_agro_range.set_deferred("monitoring", true)
 	var room_grid: Dictionary[Vector2i, Dictionary] = {}
 	gate_frame = 0
@@ -166,10 +171,10 @@ func _add_extra_passages(room_grid: Dictionary[Vector2i, Dictionary], chance: fl
 
 func _gen_chunk(chuck_pos: Vector2i, left: bool, right: bool, up: bool, down: bool, has_ladder: bool):
 	var center: Vector2i = chuck_pos * CHUNK_SIZE
-	_erase_rect(center, Vector2i(16, 16))
+	_erase_rect(center, CHUNK_SIZE)
 	var main_room_size := Vector2i(
-		randi_range(6, CHUNK_SIZE.x-4),
-		randi_range(6, CHUNK_SIZE.y-4)
+		randi_range(PASSAGE_WIDTH + 3, CHUNK_SIZE.x - 6),
+		randi_range(PASSAGE_WIDTH + 3, CHUNK_SIZE.x - 6)
 	)
 	if has_ladder:
 		main_room_size = BOSS_ROOM_SIZE
@@ -177,45 +182,45 @@ func _gen_chunk(chuck_pos: Vector2i, left: bool, right: bool, up: bool, down: bo
 	if left:
 		_rect(
 			Vector2i(
-				center.x - 8,
+				center.x - CHUNK_SIZE.x/2,
 				center.y
 			),
 			Vector2i(
-				16 - main_room_size.x/2,
-				3
+				CHUNK_SIZE.x + 1 - main_room_size.x/2,
+				PASSAGE_WIDTH
 			)
 		)
 	if right:
 		_rect(
 			Vector2i(
-				center.x + 8,
+				center.x + CHUNK_SIZE.x/2,
 				center.y
 			),
 			Vector2i(
-				16 - main_room_size.x/2,
-				3
+				CHUNK_SIZE.x + 1 - main_room_size.x/2,
+				PASSAGE_WIDTH
 			)
 		)
 	if up:
 		_rect(
 			Vector2i(
 				center.x,
-				center.y - 8
+				center.y - CHUNK_SIZE.x/2
 			),
 			Vector2i(
-				3,
-				16 - main_room_size.y/2
+				PASSAGE_WIDTH,
+				CHUNK_SIZE.x + 1 - main_room_size.y/2
 			)
 		)
 	if down:
 		_rect(
 			Vector2i(
 				center.x,
-				center.y + 8
+				center.y + CHUNK_SIZE.x/2
 			),
 			Vector2i(
-				3,
-				16 - main_room_size.y/2
+				PASSAGE_WIDTH,
+				CHUNK_SIZE.x + 1 - main_room_size.y/2
 			)
 		)
 	# main room
@@ -263,6 +268,10 @@ func _erase_rect(pos: Vector2i, size: Vector2i):
 						room_corner.y + pos.y + y))):
 				floor.set_cell(Vector2i(room_corner.x + pos.x + x, \
 						room_corner.y + pos.y + y), 1, Vector2i(0, 0))
+				boss_floor.set_cell(Vector2i(room_corner.x + pos.x + x, \
+						room_corner.y + pos.y + y), 1, Vector2i(0, 0))
+				decor.set_cell(Vector2i(room_corner.x + pos.x + x, \
+						room_corner.y + pos.y + y), 1, Vector2i(0, 2), 13)
 
 func _is_red(coords: Vector2i):
 	if coords <= Vector2i(1, 6) and coords >= Vector2i(0, 1):
@@ -333,12 +342,12 @@ func spawn_gate(chunk_pos: Vector2i):
 
 
 func _spawn_boss(chunk_pos: Vector2, boss_type: Bosses):
-	var boss_pos: Vector2 = Vector2(chunk_pos.x*16*24, chunk_pos.y*16*24)
+	var boss_pos: Vector2 = Vector2(chunk_pos.x*24, chunk_pos.y*24)*Vector2(CHUNK_SIZE)
 	if boss_type == Bosses.KNIGHT:
 		var knight = boss_knight_scene.instantiate()
 		knight.global_position = boss_pos
 		boss = knight
-		add_child(knight)
+		call_deferred("add_child", knight)
 	boss_agro_range.position = boss_pos
 	boss_border.position = boss_pos
 

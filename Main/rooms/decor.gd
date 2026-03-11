@@ -3,6 +3,7 @@ extends TileMapLayer
 ##
 
 signal chest_opened(chest_coords: Vector2, item: Item)
+signal new_floor()
 
 
 func open_chest(chest_coords: Vector2i, tier: int):

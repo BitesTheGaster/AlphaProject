@@ -1166,6 +1166,7 @@ script = ExtResource("1_25gao")
 unique_name_in_owner = true
 y_sort_enabled = true
 tile_set = SubResource("TileSet_hful5")
+collision_enabled = false
 
 [node name="Floor" type="TileMapLayer" parent="." unique_id=1906720896]
 unique_name_in_owner = true
@@ -1179,6 +1180,7 @@ tile_set = SubResource("TileSet_m5qh6")
 unique_name_in_owner = true
 y_sort_enabled = true
 tile_set = ExtResource("3_25gao")
+physics_quadrant_size = 1
 script = ExtResource("4_tgn16")
 
 [node name="GateOpen" type="Timer" parent="." unique_id=857360567]

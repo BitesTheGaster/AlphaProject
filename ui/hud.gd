@@ -39,7 +39,7 @@ func _process(delta: float) -> void:
 			elif GlobalInventory.inventory.items[GlobalInventory.current_slot] is Potion:
 				GlobalInventory.inventory.items[GlobalInventory.current_slot].use(player)
 				GlobalInventory.inventory.items[GlobalInventory.current_slot] = \
-						GlobalInventory.items[GlobalInventory.EMPTY]
+						Items.EMPTY
 		
 		update_textures()
 	
