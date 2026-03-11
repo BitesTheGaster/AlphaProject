@@ -5,7 +5,6 @@
 [ext_resource type="TileSet" uid="uid://bdw7jvpu1cmq0" path="res://decor.tres" id="3_25gao"]
 [ext_resource type="Script" uid="uid://dye1ah7oglb3" path="res://main/rooms/decor.gd" id="4_tgn16"]
 [ext_resource type="Texture2D" uid="uid://cuq0qs2nsr2ul" path="res://art/boss_border.png" id="5_hful5"]
-[ext_resource type="Shader" uid="uid://snmlgi0sg85o" path="res://main/rooms/room_bg.gdshader" id="6_kepd1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tgn16"]
 texture = ExtResource("1_1nc60")
@@ -1159,25 +1158,6 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_kepd1"]
-interpolation_mode = 2
-metadata/_snap_enabled = true
-metadata/_snap_count = 4
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_m5qh6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wgdlk"]
-width = 1024
-height = 1024
-noise = SubResource("FastNoiseLite_m5qh6")
-color_ramp = SubResource("Gradient_kepd1")
-seamless = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_m5qh6"]
-shader = ExtResource("6_kepd1")
-shader_parameter/noise_image = SubResource("NoiseTexture2D_wgdlk")
-shader_parameter/speed = 0.1
-
 [node name="Room" type="Node2D" unique_id=207893912]
 y_sort_enabled = true
 script = ExtResource("1_25gao")
@@ -1232,19 +1212,6 @@ autoplay = "default"
 unique_name_in_owner = true
 polygon = PackedVector2Array(-168, -140, 168, -140, 168, 172, -168, 172, -184, 188, 184, 188, 184, -156, -184, -156, -184, 188, -168, 172)
 disabled = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=755138756]
-layer = -10
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer" unique_id=1879959014]
-material = SubResource("ShaderMaterial_m5qh6")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0.14509805, 0.07450981, 0.101960786, 1)
 
 [connection signal="timeout" from="GateOpen" to="." method="_on_gate_open_timeout"]
 [connection signal="body_entered" from="BossAgroRange" to="." method="_on_boss_agro_range_body_entered"]

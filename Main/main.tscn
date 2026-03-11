@@ -1,9 +1,29 @@
 [gd_scene format=3 uid="uid://bgneytkun0o4c"]
 
 [ext_resource type="Script" uid="uid://cqw0usj8ocvkw" path="res://main/main.gd" id="1_3wy1v"]
+[ext_resource type="Shader" uid="uid://snmlgi0sg85o" path="res://main/rooms/room_bg.gdshader" id="2_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://btvcsp0rpq1v3" path="res://main/main_menu.tscn" id="3_xwkvk"]
 [ext_resource type="Texture2D" uid="uid://cc6qkkhiy2tic" path="res://art/Free/Sprite-0001.png" id="4_3wy1v"]
 [ext_resource type="PackedScene" uid="uid://bietkelq82yro" path="res://ui/hud.tscn" id="4_c651c"]
+
+[sub_resource type="Gradient" id="Gradient_kfbq2"]
+interpolation_mode = 2
+metadata/_snap_enabled = true
+metadata/_snap_count = 4
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_4dugh"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wgdlk"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_4dugh")
+color_ramp = SubResource("Gradient_kfbq2")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_67ri8"]
+shader = ExtResource("2_3wy1v")
+shader_parameter/noise_image = SubResource("NoiseTexture2D_wgdlk")
+shader_parameter/speed = 0.1
 
 [sub_resource type="Environment" id="Environment_c651c"]
 background_mode = 3
@@ -55,6 +75,19 @@ anim_speed_max = 1.0
 y_sort_enabled = true
 script = ExtResource("1_3wy1v")
 floor_size = Vector2i(3, 1)
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=1048637180]
+layer = -10
+
+[node name="ColorRect" type="ColorRect" parent="Background" unique_id=1752232695]
+material = SubResource("ShaderMaterial_67ri8")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.14509805, 0.07450981, 0.101960786, 1)
 
 [node name="Hud" parent="." unique_id=594341442 instance=ExtResource("4_c651c")]
 unique_name_in_owner = true
