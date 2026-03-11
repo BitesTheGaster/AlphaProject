@@ -16,5 +16,6 @@ metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
 script = ExtResource("1_5vsyt")
 speed = 60.0
 max_health = 500
+health = 500
 weapon_stats = SubResource("Resource_8qsu7")
 metadata/_custom_type_script = "uid://bioql8u0ytv8k"

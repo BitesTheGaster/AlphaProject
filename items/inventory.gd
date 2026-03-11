@@ -52,10 +52,6 @@ var items: Dictionary[int, Item] = {
 }
 
 var weapon: Weapon = Weapons.IRON_SHORT_SWORD
-#var magic1: Spell
-#var magic2: Spell
-#var magic3: Spell
-#var trinkets: Array[Trinket]
 
 
 func get_free_slot() -> int:

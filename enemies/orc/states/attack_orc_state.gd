@@ -46,6 +46,7 @@ func exit() -> void:
 	enemy.animation_player.call_deferred("stop")
 	
 	enemy.axe_collision.set_deferred("disabled", true)
+	
 	enemy.hit_range_collision.set_deferred("disabled", false)
 
 

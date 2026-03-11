@@ -4,7 +4,7 @@ extends Resource
 
 @export var speed: float = 40.0
 @export var max_health: int = 50
-var health: int = max_health
+@export var health: int = 50
 var current_debuffs: Array[Debuff] = [
 	
 ]

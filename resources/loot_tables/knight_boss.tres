@@ -1,32 +1,15 @@
 [gd_resource type="Resource" script_class="LootTable" format=3 uid="uid://cosub5dsc8a6r"]
 
 [ext_resource type="Script" uid="uid://svfjbaof8qg4" path="res://loot_tables/item_drop.gd" id="1_rtrs6"]
+[ext_resource type="Resource" uid="uid://cfuikggk472qp" path="res://resources/items/weapons/sharp_sword.tres" id="2_bf21p"]
 [ext_resource type="Script" uid="uid://djmoo36gotsef" path="res://loot_tables/loot_table.gd" id="2_nc4vi"]
-
-[sub_resource type="Resource" id="Resource_rtrs6"]
-script = ExtResource("1_rtrs6")
-metadata/_custom_type_script = "uid://svfjbaof8qg4"
-
-[sub_resource type="Resource" id="Resource_nc4vi"]
-script = ExtResource("1_rtrs6")
-metadata/_custom_type_script = "uid://svfjbaof8qg4"
-
-[sub_resource type="Resource" id="Resource_bf21p"]
-script = ExtResource("1_rtrs6")
-metadata/_custom_type_script = "uid://svfjbaof8qg4"
-
-[sub_resource type="Resource" id="Resource_j2rtb"]
-script = ExtResource("1_rtrs6")
-metadata/_custom_type_script = "uid://svfjbaof8qg4"
 
 [sub_resource type="Resource" id="Resource_xp6l1"]
 script = ExtResource("1_rtrs6")
+item = ExtResource("2_bf21p")
 metadata/_custom_type_script = "uid://svfjbaof8qg4"
 
 [resource]
 script = ExtResource("2_nc4vi")
-drops = Array[ExtResource("1_rtrs6")]([SubResource("Resource_rtrs6"), SubResource("Resource_nc4vi"), SubResource("Resource_bf21p"), SubResource("Resource_j2rtb"), SubResource("Resource_xp6l1")])
-min_drops = 2
-max_drops = 4
-luck_scaling = 0.5
+drops = Array[ExtResource("1_rtrs6")]([SubResource("Resource_xp6l1")])
 metadata/_custom_type_script = "uid://djmoo36gotsef"

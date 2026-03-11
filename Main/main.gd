@@ -58,9 +58,9 @@ func _spawn_item(pos: Vector2, item: Item):
 
 
 func _pickup_item(dropped_item: DroppedItem, item: Item):
-	var free_slot: int = Global.inventory.get_free_slot()
+	var free_slot: int = GlobalInventory.inventory.get_free_slot()
 	if free_slot != 0:
-		Global.inventory.items[free_slot] = item
+		GlobalInventory.inventory.items[free_slot] = item
 		dropped_item.queue_free()
 		hud.update_textures()
 
@@ -146,15 +146,20 @@ func _on_boss_agro_range_body_entered(body: Node2D) -> void:
 
 
 func _on_boss_death(global_pos: Vector2, loot_table_name: LootManager.Names):
-	var orc_loot: Array[Item] = \
+	var loot: Array[Item] = \
 			LootManager.loot_tables[loot_table_name] \
 			.get_loot(player.stats.luck)
 	var count: int = 1
-	for item in orc_loot:
+	for item in loot:
 		var pos: Vector2 = global_pos
-		pos += 8*Vector2.from_angle(deg_to_rad(360.0/len(orc_loot)*count+90))
+		pos += 8*Vector2.from_angle(deg_to_rad(360.0/len(loot)*count+90))
 		_spawn_item(pos, item)
 		count += 1
+	_room.decor.show()
+	_room.walls.show()
+	_room.floor.show()
+	_room.boss_border_collision.set_deferred("disabled", true)
+	_room.boss_border_sprite.hide()
 	_room.spawn_gate(_room.boss_room)
 	_room.gate_open.start()
 

@@ -11,6 +11,7 @@ enum Bosses {
 }
 
 const CHUNK_SIZE := Vector2i(16, 16)
+const BOSS_ROOM_SIZE := Vector2i(14, 14)
 
 var room_grid: Dictionary[Vector2i, Dictionary] = {}
 var gate_pos: Vector2i = Vector2i.ZERO
@@ -28,9 +29,13 @@ var boss: Enemy
 @onready var boss_knight_scene = preload("res://enemies/knight_boss/knight_boss.tscn")
 @onready var walls: TileMapLayer = %Walls
 @onready var floor: TileMapLayer = %Floor
+@onready var boss_floor: TileMapLayer = %BossFloor
 @onready var decor: TileMapLayer = %Decor
 @onready var gate_open: Timer = %GateOpen
 @onready var boss_agro_range: Area2D = %BossAgroRange
+@onready var boss_border: StaticBody2D = %BossBorder
+@onready var boss_border_sprite: AnimatedSprite2D = %BossBorderSprite
+@onready var boss_border_collision: CollisionPolygon2D = %BossBorderCollision
 
 
 func generate(floor_size: Vector2i):
@@ -167,7 +172,7 @@ func _gen_chunk(chuck_pos: Vector2i, left: bool, right: bool, up: bool, down: bo
 		randi_range(6, CHUNK_SIZE.y-4)
 	)
 	if has_ladder:
-		main_room_size = CHUNK_SIZE - Vector2i(2, 2)
+		main_room_size = BOSS_ROOM_SIZE
 	
 	if left:
 		_rect(
@@ -241,11 +246,10 @@ func _rect(pos: Vector2i, size: Vector2i):
 						room_corner.y + pos.y + y))):
 				floor_cells.append(Vector2i(room_corner.x + pos.x + x, \
 						room_corner.y + pos.y + y))
-				decor.set_cell(Vector2i(room_corner.x + pos.x + x, \
-						room_corner.y + pos.y + y), 1, Vector2i(0, 2))
 	
 	walls.set_cells_terrain_connect(wall_cells, 0, 0, false)
 	floor.set_cells_terrain_connect(floor_cells, 0, 0)
+	decor.set_cells_terrain_connect(floor_cells, 0, 0)
 
 
 func _erase_rect(pos: Vector2i, size: Vector2i):
@@ -277,7 +281,7 @@ func _red_floor(pos: Vector2i, size: Vector2i):
 				floor_cells.append(Vector2i(room_corner.x + pos.x + x, \
 						room_corner.y + pos.y + y))
 	
-	floor.set_cells_terrain_connect(floor_cells, 0, 1)
+	boss_floor.set_cells_terrain_connect(floor_cells, 0, 0)
 
 
 func _spawn_orc(pos: Vector2, size: Vector2, frec: float):
@@ -336,11 +340,15 @@ func _spawn_boss(chunk_pos: Vector2, boss_type: Bosses):
 		boss = knight
 		add_child(knight)
 	boss_agro_range.position = boss_pos
+	boss_border.position = boss_pos
 
 
 func _on_boss_agro_range_body_entered(body: Node2D) -> void:
 	if body is Player:
 		boss_agro.emit(body)
-		_erase_rect(boss_room*16, Vector2i(256, 256))
-		close_room(boss_room, true)
+		boss_border_collision.set_deferred("disabled", false)
+		boss_border_sprite.show()
+		walls.hide()
+		decor.hide()
+		floor.hide()
 		boss_agro_range.set_deferred("monitoring", false)

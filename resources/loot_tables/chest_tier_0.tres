@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://bx17o4w2d0mcd" path="res://resources/items/weapons/iron_sword.tres" id="3_8t8r5"]
 [ext_resource type="Resource" uid="uid://dh8pnru2lomoa" path="res://resources/items/weapons/golden_short_sword.tres" id="4_vmtyo"]
 [ext_resource type="Resource" uid="uid://0e0q8hqyiny0" path="res://resources/items/potions/regeneration_potion.tres" id="5_8t8r5"]
-[ext_resource type="Resource" uid="uid://cfuikggk472qp" path="res://resources/items/weapons/sharp_sword.tres" id="6_vmtyo"]
 
 [sub_resource type="Resource" id="Resource_k5jhb"]
 script = ExtResource("1_hsvqe")
@@ -34,16 +33,9 @@ item = ExtResource("5_8t8r5")
 chance = 0.5
 metadata/_custom_type_script = "uid://svfjbaof8qg4"
 
-[sub_resource type="Resource" id="Resource_md7lu"]
-script = ExtResource("1_hsvqe")
-item = ExtResource("6_vmtyo")
-weight = 0.7
-chance = 0.3
-metadata/_custom_type_script = "uid://svfjbaof8qg4"
-
 [resource]
 script = ExtResource("2_slnoi")
-drops = Array[ExtResource("1_hsvqe")]([SubResource("Resource_k5jhb"), SubResource("Resource_nbx32"), SubResource("Resource_ok5xm"), SubResource("Resource_vmtyo"), SubResource("Resource_md7lu")])
-max_drops = 3
+drops = Array[ExtResource("1_hsvqe")]([SubResource("Resource_k5jhb"), SubResource("Resource_nbx32"), SubResource("Resource_ok5xm"), SubResource("Resource_vmtyo")])
+max_drops = 4
 luck_scaling = 0.5
 metadata/_custom_type_script = "uid://djmoo36gotsef"

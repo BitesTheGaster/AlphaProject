@@ -27,44 +27,46 @@ func _process(delta: float) -> void:
 	if Input.mouse_mode == Input.MouseMode.MOUSE_MODE_HIDDEN:
 		return
 	
-	if Input.is_action_just_pressed("Equip") and Global.current_slot != 0:
-		if Global.current_slot <= 44 and \
-				Global.inventory.weapon != Global.weapons[Global.EMPTY]:
-			if Global.inventory.items[Global.current_slot] is Weapon:
-				var temp_weapon: Weapon = Global.inventory.items[Global.current_slot]
-				Global.inventory.items[Global.current_slot] = Global.inventory.weapon
-				Global.inventory.weapon = temp_weapon
-				Global.inventory.weapon.equip(player)
-			if Global.inventory.items[Global.current_slot] is Potion:
-				Global.inventory.items[Global.current_slot].use(player)
-				Global.inventory.items[Global.current_slot] = Global.items[Global.EMPTY]
+	if Input.is_action_just_pressed("Equip") and GlobalInventory.current_slot != 0:
+		if GlobalInventory.current_slot <= 44 and \
+				GlobalInventory.inventory.weapon != Weapons.EMPTY:
+			if GlobalInventory.inventory.items[GlobalInventory.current_slot] is Weapon:
+				var temp_weapon: Weapon = GlobalInventory.inventory.items[GlobalInventory.current_slot]
+				GlobalInventory.inventory.items[GlobalInventory.current_slot] = \
+						GlobalInventory.inventory.weapon
+				GlobalInventory.inventory.weapon = temp_weapon
+				GlobalInventory.inventory.weapon.equip(player)
+			elif GlobalInventory.inventory.items[GlobalInventory.current_slot] is Potion:
+				GlobalInventory.inventory.items[GlobalInventory.current_slot].use(player)
+				GlobalInventory.inventory.items[GlobalInventory.current_slot] = \
+						GlobalInventory.items[GlobalInventory.EMPTY]
 		
 		update_textures()
 	
-	if Input.is_action_just_pressed("Drop") and Global.current_slot <= 44 \
-			and Global.current_slot >= 1:
-		Global.inventory.items[Global.current_slot] = Global.items[Global.EMPTY]
+	if Input.is_action_just_pressed("Drop") and GlobalInventory.current_slot <= 44 \
+			and GlobalInventory.current_slot >= 1:
+		GlobalInventory.inventory.items[GlobalInventory.current_slot] = \
+				Items.EMPTY
 		
 		update_textures()
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.mouse_mode == Input.MouseMode.MOUSE_MODE_HIDDEN:
-		Global.current_slot = 0
+		GlobalInventory.current_slot = 0
 		return
 	
 	var mouse_pos: Vector2
 	if event is InputEventMouseMotion:
 		mouse_pos = event.position
+		GlobalInventory.current_slot = _get_item_slot(mouse_pos)
 		tooltip.position = mouse_pos - Vector2(0, -32)
-		if Global.current_slot == 0:
+		if GlobalInventory.current_slot == 0:
 			tooltip.text = ""
-		elif Global.current_slot <= 44:
-			tooltip.text = Global.inventory.items[Global.current_slot].item_name
-		elif Global.current_slot == 45:
-			tooltip.text = Global.inventory.weapon.item_name
-		
-		Global.current_slot = _get_item_slot(mouse_pos)
+		elif GlobalInventory.current_slot <= 44:
+			tooltip.text = GlobalInventory.inventory.items[GlobalInventory.current_slot].item_name
+		elif GlobalInventory.current_slot == 45:
+			tooltip.text = GlobalInventory.inventory.weapon.item_name
 
 
 func _get_item_slot(mouse_pos: Vector2) -> int:
@@ -93,9 +95,9 @@ func _get_item_slot(mouse_pos: Vector2) -> int:
 func update_textures():
 	for child in item_slots.get_children():
 		if child is Sprite2D:
-			child.texture = Global.inventory.items[int(child.name)].texture
+			child.texture = GlobalInventory.inventory.items[int(child.name)].texture
 	
-	weapon_sprite.texture = Global.inventory.weapon.texture
+	weapon_sprite.texture = GlobalInventory.inventory.weapon.texture
 
 
 func on_player_health_changed(health: int):

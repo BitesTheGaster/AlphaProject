@@ -27,10 +27,14 @@ func _ready() -> void:
 	attack_collision.set_deferred("disabled", true)
 	nav_agent.velocity_computed.connect(_on_nav_agent_velocity_computed)
 	animation_tree.active = true
+	disabled = false
+
 
 func _process(delta: float) -> void:
 	attack.rotation = last_dir.angle()
 	update_debuffs(delta)
+	if stats.health > stats.max_health:
+		stats.health = stats.max_health
 
 
 func _physics_process(delta: float) -> void:

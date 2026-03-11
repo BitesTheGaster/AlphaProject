@@ -5166,8 +5166,7 @@ sprite_frames = SubResource("SpriteFrames_pryh6")
 animation = &""
 autoplay = "IdleDown"
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=345038241]
-path_postprocessing = 1
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=405221629]
 avoidance_enabled = true
 
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=1267699481]

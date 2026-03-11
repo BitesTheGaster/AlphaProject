@@ -589,7 +589,7 @@ metadata/_custom_type_script = "uid://bxbdycthw6cwl"
 
 [node name="AgroRange" type="Area2D" parent="." unique_id=534254225]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AgroRange" unique_id=446414645]
+[node name="AgroRangeCollision" type="CollisionShape2D" parent="AgroRange" unique_id=446414645]
 shape = SubResource("CircleShape2D_2lury")
 debug_color = Color(0.71232146, 0.5380312, 5.7756904e-07, 0)
 
