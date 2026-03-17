@@ -4,8 +4,8 @@
 
 [resource]
 script = ExtResource("1_7snl2")
-damage = -1
-duration = 10.0
-delay = 0.25
+damage = 1
+delay = 0.1
+duration = 4.0
 color = Color(0.99999756, 0.4592005, 0.5373402, 1)
 metadata/_custom_type_script = "uid://clfh6ydif35ae"

@@ -5,6 +5,7 @@ extends CanvasLayer
 var _item_sprites: Dictionary[int, Sprite2D]
 var min_fps: float = 999
 var max_fps: float = -1
+var inventory_closed: bool = false
 
 @onready var weapon_sprite: Sprite2D = %WeaponSprite
 @onready var tooltip: Label = %Tooltip
@@ -24,7 +25,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if Input.mouse_mode == Input.MouseMode.MOUSE_MODE_HIDDEN:
+	if inventory_closed:
 		return
 	
 	if Input.is_action_just_pressed("Equip") and GlobalInventory.current_slot != 0:
@@ -52,7 +53,7 @@ func _process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.mouse_mode == Input.MouseMode.MOUSE_MODE_HIDDEN:
+	if inventory_closed:
 		GlobalInventory.current_slot = 0
 		return
 	

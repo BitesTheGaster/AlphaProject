@@ -8,24 +8,13 @@ func _ready() -> void:
 
 
 func update(delta: float) -> void:
-	player.input_dir = Vector2(
+	player.pressed_dir = Vector2(
 			Input.get_axis("Left", "Right"),
 			Input.get_axis("Up", "Down")
 	).normalized()
 	
-	if Input.is_action_pressed("Right") and \
-			not Input.is_action_pressed("Left"):
-		player.last_dir = Vector2.RIGHT
-	elif Input.is_action_pressed("Left") and \
-			not Input.is_action_pressed("Right"):
-		player.last_dir = Vector2.LEFT
-	elif Input.is_action_pressed("Down"):
-		player.last_dir = Vector2.DOWN
-	elif Input.is_action_pressed("Up"):
-		player.last_dir = Vector2.UP
-	
 	player.animation_tree.set("parameters/Run/blend_position", 
-			player.last_dir)
+			player.look_dir)
 	
 	if Input.is_action_just_pressed("Attack"):
 		player.velocity = Vector2.ZERO
@@ -33,7 +22,8 @@ func update(delta: float) -> void:
 
 func physics_update(delta: float) -> void:
 	player.velocity = player.velocity.move_toward(
-			player.input_dir*player.stats.speed, player.stats.speed)
+			player.stats.movement_component.get_speed(player.look_dir, player.pressed_dir),
+			player.stats.movement_component.acel_speed)
 	if not player.velocity:
 		state_machine.change_state("idle")
 	

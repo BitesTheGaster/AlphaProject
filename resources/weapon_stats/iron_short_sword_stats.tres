@@ -2,8 +2,17 @@
 
 [ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="1_x6eab"]
 [ext_resource type="Script" uid="uid://cc88k7m5lh5ge" path="res://items/weapons/weapon_stats.gd" id="2_bgbjk"]
+[ext_resource type="Script" uid="uid://o37yeqfbpf2l" path="res://items/debuffs/defence_debuff.gd" id="2_frf2t"]
+
+[sub_resource type="Resource" id="Resource_l8w5h"]
+script = ExtResource("2_frf2t")
+absolute_defence_mult = -99.0
+duration = 999.0
+color = Color(0, 18.892157, 18.892157, 1)
+metadata/_custom_type_script = "uid://o37yeqfbpf2l"
 
 [resource]
 script = ExtResource("2_bgbjk")
 speed = 1.3
+applied_debuffs = Array[ExtResource("1_x6eab")]([SubResource("Resource_l8w5h")])
 metadata/_custom_type_script = "uid://cc88k7m5lh5ge"

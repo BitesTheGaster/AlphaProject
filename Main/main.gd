@@ -41,13 +41,13 @@ func _process(delta: float) -> void:
 
 
 func _on_player_open_inventory():
-	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_VISIBLE
+	hud.inventory_closed = false
 	hud.inventory.show()
 	hud.tooltip.show()
 
 
 func _on_player_close_inventory():
-	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_HIDDEN
+	hud.inventory_closed = true
 	hud.inventory.hide()
 	hud.tooltip.hide()
 
@@ -71,7 +71,7 @@ func _pickup_item(dropped_item: DroppedItem, item: Item):
 
 
 func _start_game():
-	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	hud.inventory_closed = true
 	
 	main_menu.hide()
 	hud.show()

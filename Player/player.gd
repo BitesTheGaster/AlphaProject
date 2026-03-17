@@ -6,10 +6,10 @@ signal health_changed(health: int)
 signal open_inventory()
 signal close_inventory()
 
-var stats: PlayerStats = preload("res://resources/player_stats.tres")\
-		.duplicate()
-var last_dir := Vector2.DOWN
-var input_dir: Vector2
+@export var stats: PlayerStats
+
+var look_dir := Vector2.DOWN
+var pressed_dir: Vector2
 var inventory_opened: bool = false
 var camera_target_zoom := Vector2.ONE * 4
 var hair_modulate: Color
@@ -73,28 +73,42 @@ func _process(delta: float) -> void:
 		attack.play("Nothing")
 	
 	update_debuffs(delta)
-	if stats.health > stats.max_health:
-		stats.health = stats.max_health
+	if stats.health_component.current_health > stats.health_component.max_health:
+		stats.health_component.current_health = stats.health_component.max_health
 
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		var look_dir_raw = (event.position - Vector2(1920/2, 1080/2))\
+		.normalized()
+		var look_dir_x = look_dir_raw.snapped(Vector2(1, 2))
+		var look_dir_y = look_dir_raw.snapped(Vector2(2, 1))
+		if look_dir_x and look_dir_y:
+			look_dir = look_dir_x
+		elif look_dir_x:
+			look_dir = look_dir_x
+		elif look_dir_y:
+			look_dir = look_dir_y
 
 func take_damage(damage: int):
-	if stats.health <= 0:
-		return
-	stats.health -= damage
-	health_changed.emit(stats.health)
-	if stats.health <= 0:
+	stats.health_component.take_damage(damage)
+	health_changed.emit(stats.health_component.current_health)
+	if stats.health_component.current_health <= 0:
 		state_machine.change_state("death")
 
 
 func take_damage_from_weapon(weapon_stats: WeaponStats):
-	if stats.health <= 0:
-		return
-	stats.health -= weapon_stats.damage
+	stats.health_component.take_damage(weapon_stats.damage)
 	for debuff in weapon_stats.applied_debuffs:
 		stats.current_debuffs.append(debuff.duplicate())
-	health_changed.emit(stats.health)
-	if stats.health <= 0:
+	health_changed.emit(stats.health_component.current_health)
+	if stats.health_component.current_health <= 0:
 		state_machine.change_state("death")
+
+
+func heal(health_amount: int):
+	stats.health_component.heal(health_amount)
+	health_changed.emit(stats.health_component.current_health)
 
 
 func update_attack_hitbox():
@@ -128,8 +142,11 @@ func update_debuffs(delta: float):
 	var color = Vector3(1, 1, 1)
 	var cnt: int = 1
 	for debuff in stats.current_debuffs:
+		if not debuff.entered:
+			debuff.enter(self)
 		debuff.apply_debuff(self, delta)
 		if not debuff.is_active():
+			debuff.exit(self)
 			stats.current_debuffs.erase(debuff)
 		color += Vector3(debuff.color.r, debuff.color.g, debuff.color.b)
 		cnt += 1

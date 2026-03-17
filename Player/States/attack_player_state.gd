@@ -26,7 +26,7 @@ func enter() -> void:
 	player.animation_tree.set("callback_mode_discrete", 0)
 	
 	player.animation_tree.set("parameters/Attack/blend_position", 
-			player.last_dir)
+			player.look_dir)
 	
 	player.sprite.speed_scale = player.stats.weapon_stats.speed
 	player.hair.speed_scale = player.stats.weapon_stats.speed

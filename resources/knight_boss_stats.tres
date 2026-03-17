@@ -3,18 +3,16 @@
 [ext_resource type="Script" uid="uid://bioql8u0ytv8k" path="res://enemies/enemy_stats.gd" id="1_5vsyt"]
 [ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="2_uxqdr"]
 [ext_resource type="Script" uid="uid://cc88k7m5lh5ge" path="res://items/weapons/weapon_stats.gd" id="3_1cds0"]
-[ext_resource type="Resource" uid="uid://bac4vwvf5y5y1" path="res://resources/debuffs/bleed_debuff.tres" id="3_8qsu7"]
 
 [sub_resource type="Resource" id="Resource_8qsu7"]
 script = ExtResource("3_1cds0")
 damage = 30
-applied_debuffs = Array[ExtResource("2_uxqdr")]([ExtResource("3_8qsu7")])
 hitbox = Vector2(48, 64)
+slash_color = Color(0.53724635, 1.1852197e-06, 2.8878452e-07, 1)
 metadata/_custom_type_script = "uid://cc88k7m5lh5ge"
 
 [resource]
 script = ExtResource("1_5vsyt")
-speed = 60.0
 max_health = 500
 health = 500
 weapon_stats = SubResource("Resource_8qsu7")

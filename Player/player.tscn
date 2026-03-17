@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c0q7vm7yq7vjy" path="res://player/player.gd" id="1_l8h54"]
 [ext_resource type="Texture2D" uid="uid://1ftn8mpcj145" path="res://art/RPG_Hero/Attack.png" id="2_hg6s5"]
+[ext_resource type="Resource" uid="uid://utvpvdnubabk" path="res://resources/player_stats.tres" id="2_yllr7"]
 [ext_resource type="Texture2D" uid="uid://lcckihdub432" path="res://art/RPG_Hero/Death.png" id="3_8t03j"]
 [ext_resource type="Texture2D" uid="uid://c10xj5hgvs1v3" path="res://art/RPG_Hero/run.png" id="3_rgyib"]
 [ext_resource type="Script" uid="uid://cufkjl78sb2tf" path="res://player/player_state_machine.gd" id="4_gwnis"]
@@ -5250,6 +5251,7 @@ size = Vector2(14, 20)
 [node name="Player" type="CharacterBody2D" unique_id=1479232073 groups=["player"]]
 y_sort_enabled = true
 script = ExtResource("1_l8h54")
+stats = ExtResource("2_yllr7")
 
 [node name="AttackParticles" type="CPUParticles2D" parent="." unique_id=319846516]
 unique_name_in_owner = true

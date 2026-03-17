@@ -1166,7 +1166,6 @@ script = ExtResource("1_25gao")
 unique_name_in_owner = true
 y_sort_enabled = true
 tile_set = SubResource("TileSet_hful5")
-collision_enabled = false
 
 [node name="Floor" type="TileMapLayer" parent="." unique_id=1906720896]
 unique_name_in_owner = true

@@ -1,9 +1,22 @@
 [gd_resource type="Resource" script_class="PlayerStats" format=3 uid="uid://utvpvdnubabk"]
 
+[ext_resource type="Script" uid="uid://mgqurqgnmjvd" path="res://components/health_component.gd" id="1_dypyc"]
+[ext_resource type="Script" uid="uid://c0qq462nt2uj3" path="res://items/debuffs/debuff.gd" id="1_jr0oy"]
 [ext_resource type="Script" uid="uid://duxiibe011slr" path="res://player/player_stats.gd" id="1_t35kn"]
+[ext_resource type="Script" uid="uid://cmwx1a122rvca" path="res://components/movement_component.gd" id="2_aj3ji"]
 [ext_resource type="Resource" uid="uid://d0y666eokkhem" path="res://resources/weapon_stats/iron_short_sword_stats.tres" id="2_wjo15"]
+
+[sub_resource type="Resource" id="Resource_jr0oy"]
+script = ExtResource("1_dypyc")
+metadata/_custom_type_script = "uid://mgqurqgnmjvd"
+
+[sub_resource type="Resource" id="Resource_i44p6"]
+script = ExtResource("2_aj3ji")
+metadata/_custom_type_script = "uid://cmwx1a122rvca"
 
 [resource]
 script = ExtResource("1_t35kn")
+movement_component = SubResource("Resource_i44p6")
+health_component = SubResource("Resource_jr0oy")
 weapon_stats = ExtResource("2_wjo15")
 metadata/_custom_type_script = "uid://duxiibe011slr"

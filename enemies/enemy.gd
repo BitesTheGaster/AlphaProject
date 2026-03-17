@@ -28,8 +28,11 @@ func update_debuffs(delta: float):
 	var color = Vector3(1, 1, 1)
 	var cnt: int = 1
 	for debuff in stats.current_debuffs:
+		if not debuff.entered:
+			debuff.enter(self)
 		debuff.apply_debuff(self, delta)
 		if not debuff.is_active():
+			debuff.exit(self)
 			stats.current_debuffs.erase(debuff)
 		color += Vector3(debuff.color.r, debuff.color.g, debuff.color.b)
 		cnt += 1

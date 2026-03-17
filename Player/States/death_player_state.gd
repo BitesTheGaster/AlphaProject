@@ -21,7 +21,7 @@ func update_input(event: InputEvent) -> void:
 
 func enter() -> void:
 	player.animation_tree.set("parameters/Death/blend_position", 
-			player.last_dir)
+			player.look_dir)
 			
 	# Dominant
 	player.animation_tree.set("callback_mode_discrete", 0)

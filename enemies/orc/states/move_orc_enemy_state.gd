@@ -11,7 +11,8 @@ func update(delta: float) -> void:
 	if not enemy.target:
 		state_machine.change_state("idle")
 	else:
-		enemy.go_to(enemy.target.global_position)
+		enemy.go_to(enemy.target.global_position + 
+				Vector2(randf_range(-9.5, 9.5), randf_range(-19, 19)))
 
 
 
