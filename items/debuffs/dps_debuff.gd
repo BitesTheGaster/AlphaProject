@@ -27,4 +27,4 @@ func apply_debuff(target: CharacterBody2D, delta: float):
 			if damage > 0:
 				target.take_damage(damage)
 			else:
-				target.heal(damage)
+				target.heal(-damage)

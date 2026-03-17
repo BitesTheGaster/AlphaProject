@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource("1_7snl2")
-damage = 1
+damage = -1
 delay = 0.1
 duration = 4.0
 color = Color(0.99999756, 0.4592005, 0.5373402, 1)
